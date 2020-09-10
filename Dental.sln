@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dental.Data", "Dental.Data\Dental.Data.csproj", "{B6158CFA-62DA-4B95-8D46-7D5B6565384F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dental.UI", "Dental.UI\Dental.UI.csproj", "{C8266EBA-A892-4AEB-875D-975EC319CFA4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B6158CFA-62DA-4B95-8D46-7D5B6565384F} = {B6158CFA-62DA-4B95-8D46-7D5B6565384F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dental.API", "Dental.API\Dental.API.csproj", "{350AA76D-C0C5-42FA-B30E-B951623A3C5E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B6158CFA-62DA-4B95-8D46-7D5B6565384F} = {B6158CFA-62DA-4B95-8D46-7D5B6565384F}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6158CFA-62DA-4B95-8D46-7D5B6565384F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6158CFA-62DA-4B95-8D46-7D5B6565384F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6158CFA-62DA-4B95-8D46-7D5B6565384F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6158CFA-62DA-4B95-8D46-7D5B6565384F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8266EBA-A892-4AEB-875D-975EC319CFA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8266EBA-A892-4AEB-875D-975EC319CFA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8266EBA-A892-4AEB-875D-975EC319CFA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8266EBA-A892-4AEB-875D-975EC319CFA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{350AA76D-C0C5-42FA-B30E-B951623A3C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{350AA76D-C0C5-42FA-B30E-B951623A3C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{350AA76D-C0C5-42FA-B30E-B951623A3C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{350AA76D-C0C5-42FA-B30E-B951623A3C5E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6391DAD-388C-48C2-995E-0524134A4B00}
+	EndGlobalSection
+EndGlobal
