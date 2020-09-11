@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Dental.Data.Models
 {
-    public class PaySetups
+    public class PaySetup
     {
         public int Id { get; set; }
         public string Username { get; set; }

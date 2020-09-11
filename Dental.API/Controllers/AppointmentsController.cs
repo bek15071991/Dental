@@ -1,16 +1,14 @@
-﻿using System;
+﻿using Dental.Data.Data;
+using Dental.Data.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Dental.Data.Data;
-using Dental.Data.Models;
 
 namespace Dental.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/appointments")]
     [ApiController]
     public class AppointmentsController : ControllerBase
     {
@@ -23,37 +21,37 @@ namespace Dental.API.Controllers
 
         // GET: api/Appointments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Appointments>>> GetAppointments()
+        public async Task<ActionResult<IEnumerable<Appointment>>> GetAppointments()
         {
             return await _context.Appointments.ToListAsync();
         }
 
         // GET: api/Appointments/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Appointments>> GetAppointments(int id)
+        public async Task<ActionResult<Appointment>> GetAppointment(int id)
         {
-            var appointments = await _context.Appointments.FindAsync(id);
+            var appointment = await _context.Appointments.FindAsync(id);
 
-            if (appointments == null)
+            if (appointment == null)
             {
                 return NotFound();
             }
 
-            return appointments;
+            return appointment;
         }
 
         // PUT: api/Appointments/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAppointments(int id, Appointments appointments)
+        public async Task<IActionResult> PutAppointment(int id, Appointment appointment)
         {
-            if (id != appointments.Id)
+            if (id != appointment.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(appointments).State = EntityState.Modified;
+            _context.Entry(appointment).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +59,7 @@ namespace Dental.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AppointmentsExists(id))
+                if (!AppointmentExists(id))
                 {
                     return NotFound();
                 }
@@ -78,31 +76,31 @@ namespace Dental.API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Appointments>> PostAppointments(Appointments appointments)
+        public async Task<ActionResult<Appointment>> PostAppointment(Appointment appointment)
         {
-            _context.Appointments.Add(appointments);
+            _context.Appointments.Add(appointment);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAppointments", new { id = appointments.Id }, appointments);
+            return CreatedAtAction("GetAppointment", new { id = appointment.Id }, appointment);
         }
 
         // DELETE: api/Appointments/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Appointments>> DeleteAppointments(int id)
+        public async Task<ActionResult<Appointment>> DeleteAppointment(int id)
         {
-            var appointments = await _context.Appointments.FindAsync(id);
-            if (appointments == null)
+            var appointment = await _context.Appointments.FindAsync(id);
+            if (appointment == null)
             {
                 return NotFound();
             }
 
-            _context.Appointments.Remove(appointments);
+            _context.Appointments.Remove(appointment);
             await _context.SaveChangesAsync();
 
-            return appointments;
+            return appointment;
         }
 
-        private bool AppointmentsExists(int id)
+        private bool AppointmentExists(int id)
         {
             return _context.Appointments.Any(e => e.Id == id);
         }

@@ -13,15 +13,15 @@ namespace Dental.Data.Data
             : base(options)
         {
         }
-        public DbSet<Appointments> Appointments { get; set; }
-        public DbSet<Bills> Bills { get; set; }
-        public DbSet<Clients> Clients { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Bill> Bills { get; set; }
+        public DbSet<Client> Clients { get; set; }
 
-        public DbSet<Credentials> Credentiatials { get; set; }
-        public DbSet<Messages> Messages { get; set; }
-        public DbSet<PaySetups> PaySetups { get; set; }
-        public DbSet<Procedures> Procedures { get; set; }
-        public DbSet<Providers> Providers { get; set; }
+        public DbSet<Credential> Credentiatials { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<PaySetup> PaySetups { get; set; }
+        public DbSet<Procedure> Procedures { get; set; }
+        public DbSet<Provider> Providers { get; set; }
 
     }
     }

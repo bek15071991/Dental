@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Dental.Data.Models
 {
-    public class Procedures
+    public class Procedure
     {
         public int Id { get; set; }
         public string Code { get; set; }

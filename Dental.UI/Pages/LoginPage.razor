@@ -1,0 +1,21 @@
+﻿@page "/loginpage"
+@inherits LoginPageBase
+
+<section>
+    <div>
+        <h1>Login Please</h1>
+        
+        <EditForm Model="@cred">
+            <div class="form-group row">
+                <label for="UserName" class="col-sm-3">User Name: </label>
+                <InputText id="UserName" class="form-control col-sm-5" @bind-Value="@cred.UserName" placeholder="Enter UserName: "></InputText>
+            </div>
+            <div class="form-group row">
+                <label for="Password" class="col-sm-3'>Password: "></label>
+                <inputText id="Password" class="form-control col-sm-5" @bind-Value="@cred.Password" placeholder="Enter Password: "> </inputText>/>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+            <button class="btn btn-secondary">Register</button>
+        </EditForm>
+    </div>
+</section>
