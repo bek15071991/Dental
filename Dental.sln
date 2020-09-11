@@ -3,14 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dental.Data", "Dental.Data\Dental.Data.csproj", "{B6158CFA-62DA-4B95-8D46-7D5B6565384F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dental.Data", "Dental.Data\Dental.Data.csproj", "{B6158CFA-62DA-4B95-8D46-7D5B6565384F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dental.UI", "Dental.UI\Dental.UI.csproj", "{C8266EBA-A892-4AEB-875D-975EC319CFA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dental.UI", "Dental.UI\Dental.UI.csproj", "{C8266EBA-A892-4AEB-875D-975EC319CFA4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B6158CFA-62DA-4B95-8D46-7D5B6565384F} = {B6158CFA-62DA-4B95-8D46-7D5B6565384F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dental.API", "Dental.API\Dental.API.csproj", "{350AA76D-C0C5-42FA-B30E-B951623A3C5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dental.API", "Dental.API\Dental.API.csproj", "{350AA76D-C0C5-42FA-B30E-B951623A3C5E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B6158CFA-62DA-4B95-8D46-7D5B6565384F} = {B6158CFA-62DA-4B95-8D46-7D5B6565384F}
 	EndProjectSection
