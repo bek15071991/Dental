@@ -1,21 +1,81 @@
 ﻿@page "/loginpage"
+@using System.Xml
 @inherits LoginPageBase
 
 <section>
-    <div>
-        <h1>Login Please</h1>
-        
-        <EditForm Model="@cred">
+    @if (LoginRequired)
+    {
+        <div>
+            <h1>Login Please</h1>
+            <p>@Message</p>
+            <EditForm Model="@cred" OnValidSubmit="HandleSubmit">
+                <div class="form-group row">
+                    <label for="UserName" class="col-sm-2">User Name: </label>
+                    <InputText id="UserName" class="form-control col-sm-3" @bind-Value="@cred.UserName" placeholder="Enter UserName: "></InputText>
+                </div>
+                <div class="form-group row">
+                    <label for="Password" class="col-sm-2">Password: </label>
+                    <InputText id="Password" class="form-control col-sm-3" @bind-Value="@cred.Password" placeholder="Enter Password: "></InputText>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <button class="btn btn-secondary" @onclick="RegisterPageHandler">Register</button>
+            </EditForm>
+        </div>
+    }
+    @if (RegisterPage)
+    {
+        <h1>Register Page</h1>
+        <EditForm Model="@client" OnValidSubmit="HandleRegisterSubmit">
             <div class="form-group row">
-                <label for="UserName" class="col-sm-3">User Name: </label>
-                <InputText id="UserName" class="form-control col-sm-5" @bind-Value="@cred.UserName" placeholder="Enter UserName: "></InputText>
+                <label for="UserName" class="col-sm-2">User Name: </label>
+                <InputText id="UserName" class="form-control col-sm-3" @bind-Value="@cred.UserName" placeholder="Enter UserName: "></InputText>
             </div>
             <div class="form-group row">
-                <label for="Password" class="col-sm-3'>Password: "></label>
-                <inputText id="Password" class="form-control col-sm-5" @bind-Value="@cred.Password" placeholder="Enter Password: "> </inputText>/>
+                <label for="Password" class="col-sm-2">Password: </label>
+                <InputText id="Password" class="form-control col-sm-3" @bind-Value="@cred.Password" placeholder="Enter Password: "></InputText>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-            <button class="btn btn-secondary">Register</button>
+            <div class="form-group row">
+                <label for="FirstName" class="col-sm-2">First Name: </label>
+                <InputText id="FirstName" class="form-control col-sm-3" @bind-Value="@client.FirstName" placeholder="Enter First Name: "></InputText>
+            </div>
+            <div class="form-group row">
+                <label for="LastName" class="col-sm-2">Last Name: </label>
+                <InputText id="LastName" class="form-control col-sm-3" @bind-Value="@client.LastName" placeholder="Enter Last Name: "></InputText>
+            </div><div class="form-group row">
+                <label for="Street" class="col-sm-2">Street: </label>
+                <InputText id="Street" class="form-control col-sm-3" @bind-Value="@client.Street" placeholder="Enter Street: "></InputText>
+            </div><div class="form-group row">
+                <label for="City" class="col-sm-2">City </label>
+                <InputText id="City" class="form-control col-sm-3" @bind-Value="@client.City" placeholder="Enter City: "></InputText>
+            </div><div class="form-group row">
+                <label for="State" class="col-sm-2">State: </label>
+                <InputText id="State" class="form-control col-sm-3" @bind-Value="@client.State" placeholder="Enter State: "></InputText>
+            </div><div class="form-group row">
+                <label for="Zipcode" class="col-sm-2">Zipcode: </label>
+                <InputText id="Zipcode" class="form-control col-sm-3" @bind-Value="@client.Zipcode" placeholder="Enter Zipcode: "></InputText>
+            </div><div class="form-group row">
+                <label for="Email" class="col-sm-2">Email: </label>
+                <InputText id="Email" class="form-control col-sm-3" @bind-Value="@client.Email" placeholder="Enter Email: "></InputText>
+            </div><div class="form-group row">
+                <label for="HomePhone" class="col-sm-2">Home Phone: </label>
+                <InputText id="HomePhone" class="form-control col-sm-3" @bind-Value="@client.HomePhone" placeholder="Enter Home Phone: "></InputText>
+            </div>
+            <div class="form-group row">
+                <label for="MobilePhone" class="col-sm-2">Mobile Phone: </label>
+                <InputText id="MobilePhone" class="form-control col-sm-3" @bind-Value="@client.MobilePhone" placeholder="Enter Mobile Phone: "></InputText>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button class="btn btn-secondary" @onclick="HandleRegisterCancel">Cancel</button>
         </EditForm>
-    </div>
+    }
+    @if (LoginRequired == false && RegisterPage == false)
+    {
+        <div class="dashboard">
+            <h1>Welcome to the Dental Dashboard</h1>
+            <AppointmentCenter UserName=@cred.UserName />
+            <PaymentCenter UserName=@cred.UserName />
+            <MessageCenter UserName=@cred.UserName />
+            <button class="btn btn-primary" @onclick="DashboardLogout">Logout</button>
+        </div>
+    }
 </section>

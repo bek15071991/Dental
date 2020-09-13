@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Dental.UI.Data;
+using Dental.UI.Services;
 
 namespace Dental.UI
 {
@@ -25,6 +26,21 @@ namespace Dental.UI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var DentalURI = new Uri("http://localhost:54512/");
+
+
+            void RegisterTypedClient<TClient, TImplementation>(Uri apiBaseUrl)
+                where TClient : class where TImplementation : class, TClient
+            {
+                services.AddHttpClient<TClient, TImplementation>(client =>
+                {
+                    client.BaseAddress = apiBaseUrl;
+                });
+            }
+
+            // HTTP services
+            RegisterTypedClient<IClientDataService, ClientDataService>(DentalURI);
+            RegisterTypedClient<ICredentialDataService, CredentialDataService>(DentalURI);
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
