@@ -3,7 +3,36 @@
 
 <section>
     <h1>Payment Center</h1>
-    <p1>You have a payment of @PaymentsDue Due</p1><br/>
-    <button class="btn btn-primary">List Bills</button>
+    <p class="para-message">You have a payment of @PaymentsDue Due</p><br/>
+    <button class="btn btn-primary" @onclick="DisplayReportHandler">List Bills</button>
+    @if (DisplayBills && bills!=null) {
+
+    <table class="table table-striped message-table">
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Date</td>
+        <td>Procedure</td>
+        <td>Charge</td>
+        <td>Insurance</td>
+        <td>Balance</td>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var bill in bills)
+        {
+            <tr>
+                <td>@bill.Id</td>
+                <td>@bill.Date</td>
+                <td>@bill.Procedure</td>
+                <td>@bill.Charge</td>
+                <td>@bill.Insurance</td>
+                <td>@bill.Balance</td>
+            </tr>
+        }
+    </tbody>
+    </table>
+    }
+    
     <button class="btn btn-secondary">Make Payment</button>
 </section>

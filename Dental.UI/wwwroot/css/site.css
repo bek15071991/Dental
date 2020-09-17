@@ -3,11 +3,31 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     overflow-x: hidden;
-    background-image: url('../images/pattern.png');
-    background-repeat: repeat;
+    background-color: burlywood;
+    /* background-image: url('../images/pattern.png'); */
+    /* background-repeat: repeat; */
 }
 .dashboard {
     text-align: center;
+}
+.btn-hide {
+    display: none;
+}
+.para-message {
+    padding: 5px;
+    margin: 5px;
+    font-weight: bold;
+}
+.activity-center {
+    padding: 20px;
+    margin: 20px;
+}
+.message-table {
+    margin: 10px;
+    padding: 5px;
+    border: 1px solid blue;
+    width: 80%;
+    text-align: left;
 }
 a, .btn-link {
     color: #0366d6;

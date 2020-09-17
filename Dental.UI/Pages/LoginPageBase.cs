@@ -18,7 +18,20 @@ namespace Dental.UI.Pages
         public IClientDataService ClientDataService { get; set; }
         protected Credential cred { get; set; }
         protected Client client { get; set; }
-        public string Message { get; set; } = "";
+
+        public class Register
+        {
+            public Credential credential { get; set; }
+            public Client client { get; set; }
+        }
+
+        public Register register { get; set; } = new Register
+        {
+            credential = new Credential(),
+            client = new Client()
+
+        };
+            public string Message { get; set; } = "";
 
         public bool LoginRequired { get; set; } = true;
         public bool RegisterPage { get; set; } = false;
@@ -30,41 +43,57 @@ namespace Dental.UI.Pages
                 UserName = "jdoe",
                 Password = ""
             };
+            // sample data
+            register.credential.UserName = "jdoe";
+            register.credential.Password = "test";
         }
         // try to login with these credentials
         public async void HandleSubmit()
         {
            var credFound = (await CredentialDataService.GetCredentials())
-                .FirstOrDefault(c => c.UserName == cred.UserName && c.Password == cred.Password);
+                .FirstOrDefault(c => c.UserName == register.credential.UserName && c.Password == register.credential.Password);
            if (credFound == null)
            {
                Message = "Could not login, Try again or Register a new client";
                RegisterPage = false;
+               StateHasChanged();
            } 
            else
            {
                Message = "Logged in";
                 LoginRequired = false;
                 RegisterPage = false;
+                StateHasChanged();
            }
         }
 
         public void DashboardLogout()
         {
             LoginRequired = true;
+            StateHasChanged();
         }
         public async void HandleRegisterSubmit()
         {
+            client = register.client;
+            cred = register.credential;
+            client.UserName = cred.UserName;
             await CredentialDataService.AddCredential(cred);
             await ClientDataService.AddClient(client);
             LoginRequired = true;
             RegisterPage = false;
+            StateHasChanged();
         }
 
         public void HandleRegisterCancel()
         {
             LoginRequired = true;
             RegisterPage = false;
+            var register = new Register
+            {
+                credential = cred,
+                client = new Client()
+            };
+            StateHasChanged();
         }
         public void RegisterPageHandler()
         {
@@ -75,6 +104,7 @@ namespace Dental.UI.Pages
                 UserName=cred.UserName,
                 FirstName = ""
             };
+            StateHasChanged();
         }
     }
 }

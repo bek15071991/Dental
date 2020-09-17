@@ -10,7 +10,7 @@ namespace Dental.Data.Models
         public int Id { get; set; }
         public string UserName { get; set; }
         public DateTime Date { get; set; }
-        public Procedure ProcedureId { get; set; }
+        public string Procedure { get; set; }
         public decimal Charge { get; set; }
         public decimal Insurance { get; set; }
         public decimal Balance { get; set; }

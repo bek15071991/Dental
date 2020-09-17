@@ -3,7 +3,42 @@
 
 <section>
     <h1>Message Center</h1>
-    <p1>You have @MessageCount messages pending</p1><br/>
-    <button class="btn btn-primary">List Messages</button>
-    <button class="btn btn-secondary">Add Message</button>
+    <div class="@buttonDisplay">
+        <p class="para-message">You have @MessageCount messages pending</p><br />
+        <button class="btn btn-primary" @onclick="DisplayReportHandler">List Messages</button>
+
+    </div>
+    
+    @if (DisplayMessages && messages != null)
+    {
+        <table class="table table-striped message-table">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>Date</td>
+                <td>Dir</td>
+                <td>Message</td>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var message in messages)
+            {
+                <tr>
+                    <td>@message.Id</td>
+                    <td>@message.CreateDate</td>
+                    <td>@message.Direction</td>
+                    <td>@message.MessageText</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+
+        <button @onclick="QuickAddMessage" class="btn btn-primary">Add A Message</button>
+        <button @onclick="CloseMessageHandler" class="btn btn-secondary">Close Messages</button>
+        <AddMessageDialog @ref="addMessageDialog"
+                           UserName="@UserName"
+                           CloseEventCallback="@AddMessageDialog_OnDialogClose">
+        </AddMessageDialog>
+    }
 </section>

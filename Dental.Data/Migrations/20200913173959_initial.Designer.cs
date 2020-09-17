@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dental.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200910085737_initial")]
+    [Migration("20200913173959_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace Dental.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0-preview.8.20407.4");
 
-            modelBuilder.Entity("Dental.Data.Models.Appointments", b =>
+            modelBuilder.Entity("Dental.Data.Models.Appointment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,7 +45,7 @@ namespace Dental.Data.Migrations
                     b.ToTable("Appointments");
                 });
 
-            modelBuilder.Entity("Dental.Data.Models.Bills", b =>
+            modelBuilder.Entity("Dental.Data.Models.Bill", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -67,20 +67,18 @@ namespace Dental.Data.Migrations
                     b.Property<decimal>("Insurance")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ProcedureIdId")
-                        .HasColumnType("int");
+                    b.Property<string>("Procedure")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProcedureIdId");
-
                     b.ToTable("Bills");
                 });
 
-            modelBuilder.Entity("Dental.Data.Models.Clients", b =>
+            modelBuilder.Entity("Dental.Data.Models.Client", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,33 +86,40 @@ namespace Dental.Data.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HomePhone")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MobilePhone")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Street")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Zipcode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -122,7 +127,7 @@ namespace Dental.Data.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("Dental.Data.Models.Credentials", b =>
+            modelBuilder.Entity("Dental.Data.Models.Credential", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -133,6 +138,7 @@ namespace Dental.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -140,7 +146,7 @@ namespace Dental.Data.Migrations
                     b.ToTable("Credentiatials");
                 });
 
-            modelBuilder.Entity("Dental.Data.Models.Messages", b =>
+            modelBuilder.Entity("Dental.Data.Models.Message", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -153,7 +159,7 @@ namespace Dental.Data.Migrations
                     b.Property<string>("Direction")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Message")
+                    b.Property<string>("MessageText")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Read")
@@ -167,7 +173,7 @@ namespace Dental.Data.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("Dental.Data.Models.PaySetups", b =>
+            modelBuilder.Entity("Dental.Data.Models.PaySetup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -188,7 +194,7 @@ namespace Dental.Data.Migrations
                     b.ToTable("PaySetups");
                 });
 
-            modelBuilder.Entity("Dental.Data.Models.Procedures", b =>
+            modelBuilder.Entity("Dental.Data.Models.Procedure", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -215,7 +221,7 @@ namespace Dental.Data.Migrations
                     b.ToTable("Procedures");
                 });
 
-            modelBuilder.Entity("Dental.Data.Models.Providers", b =>
+            modelBuilder.Entity("Dental.Data.Models.Provider", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -228,13 +234,6 @@ namespace Dental.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Providers");
-                });
-
-            modelBuilder.Entity("Dental.Data.Models.Bills", b =>
-                {
-                    b.HasOne("Dental.Data.Models.Procedures", "ProcedureId")
-                        .WithMany()
-                        .HasForeignKey("ProcedureIdId");
                 });
 #pragma warning restore 612, 618
         }
