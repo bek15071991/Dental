@@ -1,0 +1,38 @@
+﻿@inherits PaySetupDialogBasex
+
+@if (ShowDialog)
+{
+    <div class="modal fade show d-block" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="titleLabel">Message Quick Add</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <EditForm Model="@PaySetupx" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="CreditCard">Credit Card: </label>
+                <InputText id="CreditCard" class="form-control" @bind-Value="@PaySetupx.CreditCardNumber" placeholder="Enter Credit Card:"></InputText>
+                <ValidationMessage For="@(() =>PaySetupx.CreditCardNumber)" />
+            </div>
+            <div class="form-group">
+                <label for="ExpDate">Exp Date: </label>
+                <InputText id="ExpDate" class="form-control" @bind-Value="@PaySetupx.ExpDate" placeholder="Enter Expiration Date:"></InputText>
+                <ValidationMessage For="@(() =>PaySetupx.ExpDate)" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Message</button>
+            <a class="btn btn-outline-primary" @onclick="@Close">Close</a>
+        </EditForm>
+
+    </div>
+    </div>
+    </div>
+    </div>
+}

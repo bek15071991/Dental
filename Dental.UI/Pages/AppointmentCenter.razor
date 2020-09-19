@@ -4,6 +4,30 @@
     <section>
     <h1>Appointment Center</h1>
     <p class="para-message">You have @ApptCount appointments pending.</p><br/>
-    <button class="btn btn-primary">List Appointments</button>
-    <button class="btn btn-secondary">Add Appointment</button>
+        <button class="btn btn-primary" @onclick="DisplayReportHandler">List Appointments</button>
+        
+        @if (DisplayAppointments && appointments != null)
+        {
+            <table class="table table-striped message-table">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Date</td>
+            <td>Duration</td>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var appointment in appointments)
+        {
+            <tr>
+                <td>@appointment.Id</td>
+                <td>@appointment.Date</td>
+                <td>@appointment.Duration</td>
+            </tr>
+        }
+        </tbody>
+        </table>
+        }
+        <button class="btn btn-secondary">Add Appointment</button>
+        
     </section>

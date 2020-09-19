@@ -14,14 +14,13 @@ namespace Dental.UI.Pages
         public decimal PaymentsDue { get; set; } = 0;
         public List<Bill> bills { get; set; } = null;
         public bool DisplayBills { get; set; } = false;
-
-        [Inject]
-        public IBillDataService BillDataService { get; set; }
+        protected PaySetupDialogx paySetupDialogx { get; set; }
+        [Inject] public IBillDataService BillDataService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             bills = (await BillDataService.GetBills())
-                .Where(b => b.UserName == UserName && b.Closed==false)
+                .Where(b => b.UserName == UserName && b.Closed == false)
                 .ToList();
             PaymentsDue = bills.Sum(b => b.Balance);
         }
@@ -29,6 +28,20 @@ namespace Dental.UI.Pages
         public void DisplayReportHandler()
         {
             DisplayBills = true;
+        }
+
+        public async void PaySetupDialogx_OnDialogClose()
+        {
+            bills = (await BillDataService.GetBills())
+                .Where(b => b.UserName == UserName && b.Closed == false)
+                .ToList();
+            PaymentsDue = bills.Sum(b => b.Balance);
+            StateHasChanged();
+        }
+
+        protected void QuickAddPayment()
+        {
+            paySetupDialogx.Show();
         }
     }
 }

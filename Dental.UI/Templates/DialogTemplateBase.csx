@@ -8,22 +8,12 @@ using Microsoft.AspNetCore.Components;
 
 namespace Dental.UI.Pages
 {
-    public class AddMessageDialogBase : ComponentBase
+    public class DialogTemplateBase : ComponentBase
     {
         public bool ShowDialog { get; set; }
         [Parameter]
         public string UserName { get; set; }
-        public Message Message { get; set; } = new Message
-        {
-            MessageText = "",
-            Direction = "In",
-            CreateDate = DateTime.Now,
-            Read = false,
-            ReadDate = new DateTime(),
-            UserName=""
-        };
-        [Inject]
-        public IMessageDataService MessageDataService { get; set; }
+        
         [Parameter]
         public EventCallback<bool> CloseEventCallback { get; set; }
         public void Show()
@@ -31,17 +21,10 @@ namespace Dental.UI.Pages
             ResetDialog();
             ShowDialog = true;
         }
+
         private void ResetDialog()
         {
-            Message = new Message
-            {
-                MessageText = "",
-                Direction = "In",
-                CreateDate = DateTime.Now,
-                Read = false,
-                ReadDate = new DateTime(),
-                UserName = UserName
-            };
+  
         }
 
         public void Close()
@@ -51,8 +34,6 @@ namespace Dental.UI.Pages
 
         protected async Task HandleValidSubmit()
         {
-            Message.UserName = UserName;
-            await MessageDataService.AddMessage(Message);
             ShowDialog = false;
 
             await CloseEventCallback.InvokeAsync(true);

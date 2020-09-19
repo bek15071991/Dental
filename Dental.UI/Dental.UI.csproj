@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Templates\DialogTemplate.razorx" />
+    <None Remove="Templates\DialogTemplateBase.csx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Templates\DialogTemplateBase.csx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Templates\DialogTemplate.razorx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Dental.Data\Dental.Data.csproj" />
   </ItemGroup>
 

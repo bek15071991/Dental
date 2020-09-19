@@ -43,7 +43,8 @@ namespace Dental.UI
             RegisterTypedClient<ICredentialDataService, CredentialDataService>(DentalURI);
             RegisterTypedClient<IMessageDataService, MessageDataService>(DentalURI);
             RegisterTypedClient<IBillDataService, BillDataService>(DentalURI);
-            services.AddRazorPages();
+            RegisterTypedClient<IAppointmentDataService, AppointmentDataService>(DentalURI);
+            RegisterTypedClient<IPaySetupDataService, PaySetupDataService>(DentalURI);
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
