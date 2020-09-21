@@ -22,6 +22,8 @@ namespace Dental.Data.Data
         public DbSet<PaySetup> PaySetups { get; set; }
         public DbSet<Procedure> Procedures { get; set; }
         public DbSet<Provider> Providers { get; set; }
+        public DbSet<Charge> Charges { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
 
     }
     }

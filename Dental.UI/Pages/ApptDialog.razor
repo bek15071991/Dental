@@ -1,0 +1,87 @@
+﻿@inherits ApptDialogBase
+
+@if (ShowDialog)
+{
+    <div class="modal fade show d-block" id="exampleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleLabel">Message Quick Add</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <EditForm Model="@Schedules" OnValidSubmit="@HandleValidSubmit">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+
+                        <div class="form-group">
+                            <label for="Years">years: </label>
+                            <InputSelect id="Years" class="form-control" @bind-Value="@YearSelected">
+                                @foreach (var year in Years)
+                                {
+                                    <option>@year</option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <div class="form-group">
+                            <label for="Months">Months: </label>
+                            <InputSelect id="Months" class="form-control" @bind-Value="@MonthSelected">
+                                @foreach (var month in Months.Keys)
+                                {
+                                    <option>@month</option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <div class="form-group">
+                            <label for="DOW">Day of Week: </label>
+                            <InputSelect id="DOW" class="form-control" @bind-Value="@DaySelected">
+                                @foreach (var day in DayOfWeek.Keys)
+                                {
+                                    <option>@day</option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <div class="form-group">
+                            <label for="TOD">Time of Day: </label>
+                            <InputSelect id="TOD" class="form-control" @bind-Value="@TODSelected">
+                                @foreach (var time in TimeOfDay)
+                                {
+                                    <option>@time</option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <button class="btn btn-secondary" @onclick="ProcessSelectHandler">Process</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a class="btn btn-outline-primary" @onclick="@Close">Close</a>
+                    </EditForm>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<section>
+    @if (Schedules != null)
+    {
+        <table class="table table-striped message-table">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>Date</td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var schedule in Schedules)
+            {
+                <tr>
+                    <td>@schedule.Id</td>
+                    <td>@schedule.Date</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</section>

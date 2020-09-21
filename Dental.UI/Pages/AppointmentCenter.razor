@@ -28,6 +28,9 @@
         </tbody>
         </table>
         }
-        <button class="btn btn-secondary">Add Appointment</button>
+        <button class="btn btn-secondary" @onclick="QuickAddAppt">Add Appointment</button>
+        <ApptDialog @ref="apptDialog"
+                          UserName="@UserName"
+                          CloseEventCallback="@ApptDialog_OnDialogClose"></ApptDialog>
         
     </section>

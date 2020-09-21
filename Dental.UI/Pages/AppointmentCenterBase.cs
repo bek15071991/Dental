@@ -16,7 +16,7 @@ namespace Dental.UI.Pages
         public bool DisplayAppointments { get; set; } = false;
         [Inject] public IAppointmentDataService AppointmentDataService { get; set; }
         public List<Appointment> appointments { get; set; } = null;
-        
+        protected ApptDialog apptDialog { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -35,6 +35,19 @@ namespace Dental.UI.Pages
         {
             DisplayAppointments = false;
         }
-    
-}
+        public async void ApptDialog_OnDialogClose()
+        {
+            appointments = (await AppointmentDataService.GetAppointments())
+                .Where(a => a.UserName == UserName)
+                .ToList();
+            ApptCount = appointments.Count();
+            StateHasChanged();
+        }
+
+        protected void QuickAddAppt()
+        {
+            apptDialog.Show();
+        }
+
+    }
 }

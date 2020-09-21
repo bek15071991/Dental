@@ -37,5 +37,6 @@
     <button class="btn btn-secondary" @onclick="QuickAddPayment">Make Payment</button>
     <PaySetupDialogx @ref="paySetupDialogx"
                       UserName="@UserName"
+                      PayAmount="@PaymentsDue"
                       CloseEventCallback="@PaySetupDialogx_OnDialogClose"></PaySetupDialogx>
 </section>

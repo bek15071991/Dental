@@ -13,10 +13,27 @@ namespace Dental.UI.Pages
         public bool ShowDialog { get; set; }
         [Parameter]
         public string UserName { get; set; }
+        [Parameter]
+        public decimal PayAmount { get; set; }
 
         [Inject] public IPaySetupDataService PaySetupDataService { get; set; }
+
+        [Inject]
+        public IChargeDataService ChargeDataService { get; set; }
+        [Inject]
+        public IBillDataService BillDataService { get; set; }
         public List<PaySetup> PaySetups { get; set; } = null;
-        public PaySetup PaySetupx { get; set; } = new PaySetup();
+        public PaySetup PaySetup { get; set; } = new PaySetup();
+
+        public class PaySetupx
+        {
+            public string CreditCardNumber { get; set; }
+            public string ExpDate { get; set; }
+            public decimal PaymnentAmount { get; set; }
+            public string CCV { get; set; }
+        }
+
+        public PaySetupx paySetupx { get; set; } = new PaySetupx();
 
         [Parameter]
         public EventCallback<bool> CloseEventCallback { get; set; }
@@ -35,16 +52,26 @@ namespace Dental.UI.Pages
             PaySetups = (await PaySetupDataService.GetPaySetups())
                 .Where(p => p.Username == UserName)
                 .ToList();
-            PaySetupx = PaySetups.FirstOrDefault();
-            if (PaySetupx == null)
+            PaySetup = PaySetups.FirstOrDefault();
+            if (PaySetup == null)
             {
-                PaySetupx = new PaySetup
+                PaySetup = new PaySetup
                 {
+                    Id=0,
+                    Username = UserName,
                     CreditCardNumber = "",
-                    ExpDate = "",
+                    ExpDate = ""
                 };
             }
-        }
+
+            paySetupx = new PaySetupx
+                {
+                    CreditCardNumber = PaySetup.CreditCardNumber,
+                    ExpDate = PaySetup.ExpDate,
+                    CCV="",
+                    PaymnentAmount = PayAmount,
+                };
+            }
 
         public void Close()
         {
@@ -52,8 +79,49 @@ namespace Dental.UI.Pages
         }
 
         protected async Task HandleValidSubmit()
-        {
-            await PaySetupDataService.UpdatePaySetup(PaySetupx);
+
+        { 
+            // update credit card infoon file
+
+            PaySetup.CreditCardNumber = paySetupx.CreditCardNumber;
+            PaySetup.ExpDate = paySetupx.ExpDate;
+            
+            
+            await PaySetupDataService.UpdatePaySetup(PaySetup);
+            // create charge record
+            var Charge = new Charge
+            {
+                UserName = UserName,
+                Date = DateTime.Now,
+                CreditCardNumber = paySetupx.CreditCardNumber,
+                ExpDate = paySetupx.ExpDate,
+                PaymentAmount = paySetupx.PaymnentAmount
+            };
+            await ChargeDataService.AddCharge(Charge);
+            // update open balance on bills
+            List<Bill> bills = (await BillDataService.GetBills())
+                .Where(b => b.UserName == UserName && b.Balance > 0)
+                .ToList();
+            decimal amount = paySetupx.PaymnentAmount;
+            foreach (var bill in bills)
+            {
+                decimal balance = bill.Balance;
+                Bill Bill = new Bill();
+                Bill = bill;
+                if (amount >= balance)
+                {
+                    amount -= balance;
+                    Bill.Balance = 0;
+                    Bill.Closed = true;
+                }
+                else
+                {
+                    Bill.Balance -= amount;
+                    amount = 0;
+                }
+
+                await BillDataService.UpdateBill(Bill);
+            }
             ShowDialog = false;
 
             await CloseEventCallback.InvokeAsync(true);

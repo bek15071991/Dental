@@ -73,7 +73,36 @@ namespace Dental.API.Controllers
 
             return NoContent();
         }
+        [HttpPut()]
+        public async Task<IActionResult> PutBill(Bill bill)
+        {
+            int id = bill.Id;
 
+            if (id != bill.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(bill).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BillExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
         // POST: api/Bills
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
