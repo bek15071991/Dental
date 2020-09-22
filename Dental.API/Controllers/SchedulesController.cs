@@ -73,7 +73,35 @@ namespace Dental.API.Controllers
 
             return NoContent();
         }
+        [HttpPut()]
+        public async Task<IActionResult> PutSchedule(Schedule schedule)
+        {
+            int id = schedule.Id;
+            if (id != schedule.Id)
+            {
+                return BadRequest();
+            }
 
+            _context.Entry(schedule).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ScheduleExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
         // POST: api/Schedules
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
