@@ -69,20 +69,25 @@
     }
     @if (LoginRequired == false && RegisterPage == false)
     {
-<div class="dashboard">
-    <h1>Welcome to the Dental Dashboard</h1>
-    <div class="activity-center">
-        <AppointmentCenter UserName="@cred.UserName" />
-    </div>
-    <div class="activity-center">
-        <PaymentCenter UserName="@cred.UserName" />
-    </div>
-    <div class="activity-center">
-        <MessageCenter UserName="@cred.UserName" />
-    </div>
-   
-    
-    <button class="btn btn-primary" @onclick="DashboardLogout">Logout</button>
-</div>
+        <div class="dashboard">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4">Welcome to The Dental Dashboard</h1>
+                   
+                </div>
+            </div>
+            <div class="activity-center">
+                <AppointmentCenter UserName="@cred.UserName"/>
+            </div>
+            <div class="activity-center">
+                <PaymentCenter UserName="@cred.UserName"/>
+            </div>
+            <div class="activity-center">
+                <MessageCenter UserName="@cred.UserName"/>
+            </div>
+
+
+            <button class="btn btn-primary" @onclick="DashboardLogout">Logout</button>
+        </div>
     }
 </section>

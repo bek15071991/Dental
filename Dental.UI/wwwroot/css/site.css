@@ -3,12 +3,18 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     overflow-x: hidden;
-    background-color: burlywood;
+    background-color: white;
     /* background-image: url('../images/pattern.png'); */
     /* background-repeat: repeat; */
 }
+.row {
+    display: flex;
+}
+.column {
+    flex: 50%;
+}
 .dashboard {
-    text-align: center;
+    text-align: left;
 }
 .btn-hide {
     display: none;

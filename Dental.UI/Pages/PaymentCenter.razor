@@ -2,41 +2,55 @@
 @inherits PaymentCenterBase
 
 <section>
-    <h1>Payment Center</h1>
-    <p class="para-message">You have a payment of @PaymentsDue Due</p><br/>
-    <button class="btn btn-primary" @onclick="DisplayReportHandler">List Bills</button>
-    @if (DisplayBills && bills!=null) {
+    <div class="row">
+        <div class="column">
 
-    <table class="table table-striped message-table">
-    <thead>
-    <tr>
-        <td>ID</td>
-        <td>Date</td>
-        <td>Procedure</td>
-        <td>Charge</td>
-        <td>Insurance</td>
-        <td>Balance</td>
-    </tr>
-    </thead>
-    <tbody>
-        @foreach (var bill in bills)
-        {
-            <tr>
-                <td>@bill.Id</td>
-                <td>@bill.Date</td>
-                <td>@bill.Procedure</td>
-                <td>@bill.Charge</td>
-                <td>@bill.Insurance</td>
-                <td>@bill.Balance</td>
-            </tr>
-        }
-    </tbody>
-    </table>
-    }
-    
-    <button class="btn btn-secondary" @onclick="QuickAddPayment">Make Payment</button>
-    <PaySetupDialogx @ref="paySetupDialogx"
-                      UserName="@UserName"
-                      PayAmount="@PaymentsDue"
-                      CloseEventCallback="@PaySetupDialogx_OnDialogClose"></PaySetupDialogx>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Payment Center</h5>
+                    <p class="card-text">You have a payment of @PaymentsDue Due</p><br/>
+                    <button class="btn btn-primary" @onclick="DisplayReportHandler">List</button>
+                    <button class="btn btn-secondary" @onclick="QuickAddPayment">Make Payment</button>
+                    <PaySetupDialogx @ref="paySetupDialogx"
+                                      UserName="@UserName"
+                                      PayAmount="@PaymentsDue"
+                                      CloseEventCallback="@PaySetupDialogx_OnDialogClose"></PaySetupDialogx>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+
+            @if (DisplayBills && bills != null)
+            {
+
+                <table class="table table-striped message-table">
+                    <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Date</td>
+                        <td>Procedure</td>
+                        <td>Charge</td>
+                        <td>Insurance</td>
+                        <td>Balance</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var bill in bills)
+                    {
+                        <tr>
+                            <td>@bill.Id</td>
+                            <td>@bill.Date.ToShortDateString()</td>
+                            <td>@bill.Procedure</td>
+                            <td>@bill.Charge</td>
+                            <td>@bill.Insurance</td>
+                            <td>@bill.Balance</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+
+
 </section>
