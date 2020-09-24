@@ -13,6 +13,13 @@ html, body {
 .column {
     flex: 50%;
 }
+#logout-button {
+    margin-top: 1px;
+    margin-right: 2px;
+    position: absolute;
+    top: 0;
+    right: 80px;
+}
 .dashboard {
     text-align: left;
 }

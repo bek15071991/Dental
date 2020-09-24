@@ -10,7 +10,7 @@
                     <h5 class="card-title">Payment Center</h5>
                     <p class="card-text">You have a payment of @PaymentsDue Due</p><br/>
                     <button class="btn btn-primary" @onclick="DisplayReportHandler">List</button>
-                    <button class="btn btn-secondary" @onclick="QuickAddPayment">Make Payment</button>
+                    <button class="btn btn-secondary" @onclick="QuickAddPayment">Pay</button>
                     <PaySetupDialogx @ref="paySetupDialogx"
                                       UserName="@UserName"
                                       PayAmount="@PaymentsDue"
@@ -25,14 +25,15 @@
 
                 <table class="table table-striped message-table">
                     <thead>
-                    <tr>
-                        <td>ID</td>
-                        <td>Date</td>
-                        <td>Procedure</td>
-                        <td>Charge</td>
-                        <td>Insurance</td>
-                        <td>Balance</td>
-                    </tr>
+                        <tr>
+                            <td>ID</td>
+                            <td>Date</td>
+                            <td>Procedure</td>
+                            <td>Charge</td>
+                            <td>Insurance</td>
+                            <td>Balance</td>
+                            <td><button class="btn btn-secondary" @onclick="() => DisplayBills=false">Close</button></td>
+                        </tr>
                     </thead>
                     <tbody>
                     @foreach (var bill in bills)
@@ -40,10 +41,11 @@
                         <tr>
                             <td>@bill.Id</td>
                             <td>@bill.Date.ToShortDateString()</td>
-                            <td>@bill.Procedure</td>
+                            <td>@Procedures[bill.Procedure]</td>
                             <td>@bill.Charge</td>
                             <td>@bill.Insurance</td>
                             <td>@bill.Balance</td>
+                            <td></td>
                         </tr>
                     }
                     </tbody>

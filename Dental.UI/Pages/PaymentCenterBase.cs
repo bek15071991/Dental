@@ -16,6 +16,8 @@ namespace Dental.UI.Pages
         public bool DisplayBills { get; set; } = false;
         protected PaySetupDialogx paySetupDialogx { get; set; }
         [Inject] public IBillDataService BillDataService { get; set; }
+        [Inject] public IProcedureDataService ProcedureDataService { get; set; }
+        public Dictionary<string, string> Procedures { get; set; }=new Dictionary<string, string>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -23,6 +25,12 @@ namespace Dental.UI.Pages
                 .Where(b => b.UserName == UserName && b.Closed == false)
                 .ToList();
             PaymentsDue = bills.Sum(b => b.Balance);
+            // create dictionary to map procedure codes
+            var procedures = (await ProcedureDataService.GetProcedures()).ToList();
+            foreach (var procedure in procedures)
+            {
+                Procedures.Add(procedure.Code, procedure.Description);
+            }
         }
 
         public void DisplayReportHandler()

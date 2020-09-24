@@ -15,6 +15,7 @@ namespace Dental.UI.Pages
         public List<Message> messages { get; set; } = null;
         public bool DisplayMessages { get; set; } = false;
         public string buttonDisplay { get; set; } = "";
+        public int messageID { get; set; }
         protected AddMessageDialog addMessageDialog { get; set; }
 
         [Inject]
@@ -42,8 +43,10 @@ namespace Dental.UI.Pages
             StateHasChanged();
         }
 
-        protected void QuickAddMessage()
+        protected void QuickAddMessage(int id)
         {
+            messageID = id;
+            InvokeAsync(StateHasChanged);
             addMessageDialog.Show();
         }
     }

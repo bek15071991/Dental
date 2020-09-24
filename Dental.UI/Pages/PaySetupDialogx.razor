@@ -6,7 +6,7 @@
     <div class="modal-dialog" role="document">
     <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="titleLabel">Message Quick Add</h5>
+        <h5 class="modal-title" id="titleLabel">Pay You Bill</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -33,9 +33,12 @@
             <div class="form-group">
                 <label for="PaymentAmount">Payment Amount: </label>
                 <InputNumber id="PaymentAmount" class="form-control" @bind-Value="@paySetupx.PaymnentAmount" placeholder="Enter payment amount:"></InputNumber>
-            </div
-
-                <button type="submit" class="btn btn-primary">Save Message</button>
+            </div>
+                @if (paySetupx.CreditCardNumber != "" && paySetupx.ExpDate != "" && paySetupx.CCV != "" && paySetupx.PaymnentAmount > 0)
+                {
+                    <button type="submit" class="btn btn-primary">Pay</button>
+                }
+               
                 <a class="btn btn-outline-primary" @onclick="@Close">Close</a>
         </EditForm>
 

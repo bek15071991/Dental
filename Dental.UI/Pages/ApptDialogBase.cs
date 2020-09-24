@@ -95,7 +95,7 @@ namespace Dental.UI.Pages
             int month = Months[MonthSelected];
             System.DayOfWeek dow = DayOfWeek[DaySelected];
             Schedules = (await ScheduleDataService.GetSchedules())
-                .Where(s => s.Date.Year == Year && s.Date.Month == month && s.Date.DayOfWeek == dow && s.Open == true)
+                .Where(s => s.Date.Year == Year && s.Date.Month == month && s.Date.DayOfWeek == dow && s.Date>=DateTime.Now && s.Open == true)
                 .ToList();
             int lowerHour = 8;
             int upperHour = 16;

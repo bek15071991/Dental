@@ -13,35 +13,44 @@ namespace Dental.UI.Pages
         public bool ShowDialog { get; set; }
         [Parameter]
         public string UserName { get; set; }
-        public Message Message { get; set; } = new Message
-        {
-            MessageText = "",
-            Direction = "In",
-            CreateDate = DateTime.Now,
-            Read = false,
-            ReadDate = new DateTime(),
-            UserName=""
-        };
+
+        [Parameter] 
+        public int MessageID { get; set; }
+
+        public Message Message { get; set; }
         [Inject]
         public IMessageDataService MessageDataService { get; set; }
         [Parameter]
         public EventCallback<bool> CloseEventCallback { get; set; }
         public void Show()
-        {
+        { 
             ResetDialog();
             ShowDialog = true;
         }
-        private void ResetDialog()
+        private async void ResetDialog()
         {
-            Message = new Message
+            if (MessageID == 0)
             {
-                MessageText = "",
-                Direction = "In",
-                CreateDate = DateTime.Now,
-                Read = false,
-                ReadDate = new DateTime(),
-                UserName = UserName
-            };
+                Message = new Message
+                {
+                    MessageText = "",
+                    Direction = "In",
+                    CreateDate = DateTime.Now,
+                    Read = false,
+                    ReadDate = new DateTime(),
+                    UserName = UserName
+                };
+            }
+            else
+            {
+                Message = await MessageDataService.GetMessage(MessageID);
+            }
+            StateHasChanged();
+        }
+
+        protected override void OnInitialized()
+        {
+            ResetDialog();
         }
 
         public void Close()
@@ -51,8 +60,12 @@ namespace Dental.UI.Pages
 
         protected async Task HandleValidSubmit()
         {
-            Message.UserName = UserName;
-            await MessageDataService.AddMessage(Message);
+            if (MessageID == 0)
+            {
+                Message.UserName = UserName;
+                await MessageDataService.AddMessage(Message);
+            }
+
             ShowDialog = false;
 
             await CloseEventCallback.InvokeAsync(true);

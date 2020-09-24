@@ -25,7 +25,11 @@ namespace Dental.API.Controllers
         {
             return await _context.Appointments.ToListAsync();
         }
-
+        /// <summary>
+        /// Return appointments created for customers.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: api/Appointments/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Appointment>> GetAppointment(int id)
@@ -71,7 +75,35 @@ namespace Dental.API.Controllers
 
             return NoContent();
         }
+        [HttpPut()]
+        public async Task<IActionResult> PutAppointment(Appointment appointment)
+        {
+            int id = appointment.Id;
+            if (id != appointment.Id)
+            {
+                return BadRequest();
+            }
 
+            _context.Entry(appointment).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AppointmentExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
         // POST: api/Appointments
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

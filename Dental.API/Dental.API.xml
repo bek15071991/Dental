@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dental.API</name>
+    </assembly>
+    <members>
+        <member name="M:Dental.API.Controllers.AppointmentsController.GetAppointment(System.Int32)">
+            <summary>
+            Return appointments created for customers.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

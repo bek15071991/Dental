@@ -11,10 +11,10 @@
                     <h5 class="card-title">Message Center</h5>
                     <p class="card-text">You have @MessageCount messages pending</p><br/>
                     <button class="btn btn-primary" @onclick="DisplayReportHandler">List</button>
-                    <button @onclick="QuickAddMessage" class="btn btn-primary">Add</button>
-                    <button @onclick="CloseMessageHandler" class="btn btn-secondary">Close</button>
+                    <button @onclick="() => QuickAddMessage(0)" class="btn btn-primary">Add</button>
                     <AddMessageDialog @ref="addMessageDialog"
                                        UserName="@UserName"
+                                       MessageID="@messageID"
                                        CloseEventCallback="@AddMessageDialog_OnDialogClose">
                     </AddMessageDialog>
 
@@ -26,12 +26,13 @@
             {
                 <table class="table table-striped message-table">
                     <thead>
-                    <tr>
-                        <td>ID</td>
-                        <td>Date</td>
-                        <td>Dir</td>
-                        <td>Message</td>
-                    </tr>
+                        <tr>
+                            <td>ID</td>
+                            <td>Date</td>
+                            <td>Dir</td>
+                            <td>Message</td>
+                            <td><button class="btn btn-secondary" @onclick="() => DisplayMessages=false">Close</button></td>
+                        </tr>
                     </thead>
                     <tbody>
                     @foreach (var message in messages)
@@ -41,6 +42,7 @@
                             <td>@message.CreateDate.ToLongDateString()</td>
                             <td>@message.Direction</td>
                             <td>@message.MessageText</td>
+                            <td><button class="btn-secondary btn" @onclick="() => QuickAddMessage(message.Id)">Open</button></td>
                         </tr>
                     }
                     </tbody>
