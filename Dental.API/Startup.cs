@@ -8,14 +8,16 @@ using Dental.Data.Data;
 using Dental.Data.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-
+[assembly: ApiConventionType(typeof(DefaultApiConventions))]
 namespace Dental.API
 {
     public class Startup
@@ -30,6 +32,37 @@ namespace Dental.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddMvc(setupAction =>
+            //    {
+            //        setupAction.Filters.Add(
+            //            new ProducesResponseTypeAttribute(StatusCodes.Status200OK));
+            //        setupAction.Filters.Add(
+            //            new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
+            //        setupAction.Filters.Add(
+            //            new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
+            //        setupAction.Filters.Add(
+            //            new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
+            //        setupAction.Filters.Add(
+            //            new ProducesDefaultResponseTypeAttribute());
+
+            //        setupAction.ReturnHttpNotAcceptable = true;
+
+            //        setupAction.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+
+            //        var jsonOutputFormatter = setupAction.OutputFormatters
+            //            .OfType<SystemTextJsonOutputFormatter>().FirstOrDefault();
+
+            //        if (jsonOutputFormatter != null)
+            //        {
+            //            // remove text/json as it isn't the approved media type
+            //            // for working with JSON at API level
+            //            if (jsonOutputFormatter.SupportedMediaTypes.Contains("text/json"))
+            //            {
+            //                jsonOutputFormatter.SupportedMediaTypes.Remove("text/json");
+            //            }
+            //        }
+            //    })
+            //    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddControllers();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dental.Data.Models;
 using Dental.UI.Services;
+using Dental.UI.ViewModels;
 using Microsoft.AspNetCore.Components;
 
 namespace Dental.UI.Pages
@@ -25,13 +26,13 @@ namespace Dental.UI.Pages
         public List<PaySetup> PaySetups { get; set; } = null;
         public PaySetup PaySetup { get; set; } = new PaySetup();
 
-        public class PaySetupx
-        {
-            public string CreditCardNumber { get; set; }
-            public string ExpDate { get; set; }
-            public decimal PaymnentAmount { get; set; }
-            public string CCV { get; set; }
-        }
+        //public class PaySetupx
+        //{
+        //    public string CreditCardNumber { get; set; }
+        //    public string ExpDate { get; set; }
+        //    public decimal PaymentAmount { get; set; }
+        //    public string CCV { get; set; }
+        //}
 
         public PaySetupx paySetupx { get; set; } = new PaySetupx();
 
@@ -69,7 +70,7 @@ namespace Dental.UI.Pages
                     CreditCardNumber = PaySetup.CreditCardNumber,
                     ExpDate = PaySetup.ExpDate,
                     CCV="",
-                    PaymnentAmount = PayAmount,
+                    PaymentAmount = PayAmount,
                 };
             }
 
@@ -95,14 +96,14 @@ namespace Dental.UI.Pages
                 Date = DateTime.Now,
                 CreditCardNumber = paySetupx.CreditCardNumber,
                 ExpDate = paySetupx.ExpDate,
-                PaymentAmount = paySetupx.PaymnentAmount
+                PaymentAmount = paySetupx.PaymentAmount
             };
             await ChargeDataService.AddCharge(Charge);
             // update open balance on bills
             List<Bill> bills = (await BillDataService.GetBills())
                 .Where(b => b.UserName == UserName && b.Balance > 0)
                 .ToList();
-            decimal amount = paySetupx.PaymnentAmount;
+            decimal amount = paySetupx.PaymentAmount;
             foreach (var bill in bills)
             {
                 decimal balance = bill.Balance;

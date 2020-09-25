@@ -32,9 +32,9 @@
             </div>
             <div class="form-group">
                 <label for="PaymentAmount">Payment Amount: </label>
-                <InputNumber id="PaymentAmount" class="form-control" @bind-Value="@paySetupx.PaymnentAmount" placeholder="Enter payment amount:"></InputNumber>
+                <InputNumber id="PaymentAmount" class="form-control" @bind-Value="@paySetupx.PaymentAmount" placeholder="Enter payment amount:"></InputNumber>
             </div>
-                @if (paySetupx.CreditCardNumber != "" && paySetupx.ExpDate != "" && paySetupx.CCV != "" && paySetupx.PaymnentAmount > 0)
+                @if (paySetupx.CreditCardNumber != "" && paySetupx.ExpDate != "" && paySetupx.CCV != "" && paySetupx.PaymentAmount > 0)
                 {
                     <button type="submit" class="btn btn-primary">Pay</button>
                 }

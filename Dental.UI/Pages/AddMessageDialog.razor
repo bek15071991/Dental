@@ -12,19 +12,20 @@
         </button>
     </div>
     <div class="modal-body">
-        <EditForm Model="@Message" OnValidSubmit="@HandleValidSubmit">
+        <EditForm Model="@MessageVM" OnValidSubmit="@HandleValidSubmit">
             <DataAnnotationsValidator/>
             <ValidationSummary/>
             
             <div class="form-group">
                 <label for="Direction">Direction: </label>
-                <InputText id="Direction" class="form-control" @bind-Value="@Message.Direction" placeholder="Enter Direction:"></InputText>
-                <ValidationMessage For="@(() =>Message.Direction)"/>
+                <InputText id="Direction" class="form-control" @bind-Value="@MessageVM.Direction" placeholder="Enter Direction:"></InputText>
+                <ValidationMessage For="@(() =>MessageVM.Direction)"/>
             </div>
             <div class="form-group">
                 <label for="MessageText">Message: </label>
-                <InputTextArea id="MessageText" Rows="10" class="form-control" @bind-Value="@Message.MessageText" placeholder="Enter Message:"></InputTextArea>
-            </div>
+                <InputTextArea id="MessageText" Rows="10" class="form-control" @bind-Value="@MessageVM.MessageText" placeholder="Enter Message:"></InputTextArea>
+                <ValidationMessage For="@(() =>MessageVM.MessageText)"/>
+                </div>
 
             <button type="submit" class="btn btn-primary">Save Message</button>
             <a class="btn btn-outline-primary" @onclick="@Close">Close</a>

@@ -2,6 +2,12 @@
 @inherits LoginPageBase
 
 <section>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Welcome to The Dental Dashboard</h1>
+                   
+        </div>
+    </div>
     @if (LoginRequired)
     {
         <div>
@@ -40,22 +46,28 @@
             <div class="form-group row">
                 <label for="LastName" class="col-sm-2">Last Name: </label>
                 <InputText id="LastName" class="form-control col-sm-3" @bind-Value="@register.client.LastName" placeholder="Enter Last Name: "></InputText>
-            </div><div class="form-group row">
+            </div>
+            <div class="form-group row">
                 <label for="Street" class="col-sm-2">Street: </label>
                 <InputText id="Street" class="form-control col-sm-3" @bind-Value="@register.client.Street" placeholder="Enter Street: "></InputText>
-            </div><div class="form-group row">
+            </div>
+            <div class="form-group row">
                 <label for="City" class="col-sm-2">City </label>
                 <InputText id="City" class="form-control col-sm-3" @bind-Value="@register.client.City" placeholder="Enter City: "></InputText>
-            </div><div class="form-group row">
+            </div>
+            <div class="form-group row">
                 <label for="State" class="col-sm-2">State: </label>
                 <InputText id="State" class="form-control col-sm-3" @bind-Value="@register.client.State" placeholder="Enter State: "></InputText>
-            </div><div class="form-group row">
+            </div>
+            <div class="form-group row">
                 <label for="Zipcode" class="col-sm-2">Zipcode: </label>
                 <InputText id="Zipcode" class="form-control col-sm-3" @bind-Value="@register.client.Zipcode" placeholder="Enter Zipcode: "></InputText>
-            </div><div class="form-group row">
+            </div>
+            <div class="form-group row">
                 <label for="Email" class="col-sm-2">Email: </label>
                 <InputText id="Email" class="form-control col-sm-3" @bind-Value="@register.client.Email" placeholder="Enter Email: "></InputText>
-            </div><div class="form-group row">
+            </div>
+            <div class="form-group row">
                 <label for="HomePhone" class="col-sm-2">Home Phone: </label>
                 <InputText id="HomePhone" class="form-control col-sm-3" @bind-Value="@register.client.HomePhone" placeholder="Enter Home Phone: "></InputText>
             </div>
@@ -70,12 +82,6 @@
     @if (LoginRequired == false && RegisterPage == false)
     {
         <div class="dashboard">
-            <div class="jumbotron jumbotron-fluid">
-                <div class="container">
-                    <h1 class="display-4">Welcome to The Dental Dashboard</h1>
-                   
-                </div>
-            </div>
             <div class="activity-center">
                 <AppointmentCenter UserName="@cred.UserName"/>
             </div>

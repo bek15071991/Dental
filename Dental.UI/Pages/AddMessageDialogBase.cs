@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dental.Data.Models;
 using Dental.UI.Services;
+using Dental.UI.ViewModels;
 using Microsoft.AspNetCore.Components;
 
 namespace Dental.UI.Pages
@@ -18,6 +19,7 @@ namespace Dental.UI.Pages
         public int MessageID { get; set; }
 
         public Message Message { get; set; }
+        public MessageVM MessageVM { get; set; }
         [Inject]
         public IMessageDataService MessageDataService { get; set; }
         [Parameter]
@@ -45,6 +47,12 @@ namespace Dental.UI.Pages
             {
                 Message = await MessageDataService.GetMessage(MessageID);
             }
+
+            MessageVM = new MessageVM
+            {
+                MessageText = Message.MessageText,
+                Direction = Message.Direction
+            };
             StateHasChanged();
         }
 
@@ -63,6 +71,8 @@ namespace Dental.UI.Pages
             if (MessageID == 0)
             {
                 Message.UserName = UserName;
+                Message.MessageText = MessageVM.MessageText;
+                Message.Direction = MessageVM.Direction;
                 await MessageDataService.AddMessage(Message);
             }
 
