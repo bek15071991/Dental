@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Dental.Data.Models;
 using Dental.UI.Services;
@@ -19,9 +20,12 @@ namespace Dental.UI.Pages
         public int MessageID { get; set; }
 
         public Message Message { get; set; }
+        public List<Doctor> Doctors { get; set; } = new List<Doctor>();
         public MessageVM MessageVM { get; set; }
         [Inject]
         public IMessageDataService MessageDataService { get; set; }
+        [Inject]
+        public IDoctorDataService DoctorDataService { get; set; }
         [Parameter]
         public EventCallback<bool> CloseEventCallback { get; set; }
         public void Show()
@@ -56,8 +60,9 @@ namespace Dental.UI.Pages
             StateHasChanged();
         }
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
+            Doctors = (await DoctorDataService.GetDoctors()).ToList();
             ResetDialog();
         }
 

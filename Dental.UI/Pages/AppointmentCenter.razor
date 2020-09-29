@@ -3,8 +3,8 @@
 
 <section>
     <div class="row">
-        <div class="column">
-            <div class="card" style="width: 18rem;">
+        <div class="navbar">
+            <div class="card left-color" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Appointment Center</h5>
                     <p class="card-text">You have @ApptCount appointments pending.</p><br/>
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="column">
+        <div class="content">
             @if (DisplayAppointments && appointments != null)
             {
                 <table class="table table-striped message-table">
@@ -44,4 +44,5 @@
         </div>
 
     </div>
+    <br/>
 </section>

@@ -13,6 +13,7 @@ namespace Dental.UI.Pages
     {
         [Inject] public IScheduleDataService ScheduleDataService { get; set; }
         [Inject] public IAppointmentDataService AppointmentDataService { get; set; }
+        [Inject] public IDoctorDataService DoctorDataService { get; set; }
         public bool ShowDialog { get; set; }
         [Parameter]
         public string UserName { get; set; }
@@ -24,6 +25,8 @@ namespace Dental.UI.Pages
 
         public Schedule Schedule { get; set; } = new Schedule();
         public List<Schedule> Schedules { get; set; }=new List<Schedule>();
+        public string DoctorName { get; set; }
+        public List<Doctor> Doctors { get; set; }=new List<Doctor>();
 
         public Dictionary<string, int> Months { get; set; } = new Dictionary<string, int>
         {
@@ -58,7 +61,7 @@ namespace Dental.UI.Pages
         public string TODSelected { get; set; }=new String("");
         public string ApptSelected { get; set; }=new string("");
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
             int currYear = DateTime.Now.Year;
             Years.Add(currYear.ToString());
@@ -68,6 +71,8 @@ namespace Dental.UI.Pages
             TimeOfDay.Add("Noon");
             TimeOfDay.Add("Afternoon");
             TimeOfDay.Add("No Preference");
+
+            Doctors = (await DoctorDataService.GetDoctors()).ToList();
 
             ResetDialog();
         }

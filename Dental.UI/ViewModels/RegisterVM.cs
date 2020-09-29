@@ -33,6 +33,10 @@ namespace Dental.UI.ViewModels
         public string HomePhone { get; set; }
         [Phone]
         public string MobilePhone { get; set; }
+
+        public string Insurance { get; set; }
+        public string PolicyNumber { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
     

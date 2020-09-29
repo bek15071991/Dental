@@ -10,7 +10,7 @@ namespace Dental.UI.ViewModels
     {
         public string Direction { get; set; }
         public string MessageText { get; set; }
-
+        public string DoctorName { get; set; }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (MessageText.Length <20)

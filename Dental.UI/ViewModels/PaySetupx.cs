@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Design;
 
@@ -13,6 +14,8 @@ namespace Dental.UI.ViewModels
         public string ExpDate { get; set; }
         public string CCV { get; set; }
         public decimal PaymentAmount { get; set; }
+        public int CCType { get; set; }
+
         public static bool Mod10Check(string creditCardNumber)
         {
             //// check whether input string is null or empty
