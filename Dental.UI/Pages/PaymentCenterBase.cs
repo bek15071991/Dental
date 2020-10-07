@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Dental.Data.Models;
 using Dental.UI.Services;
+using Dental.UI.UIHandlers;
 using Microsoft.AspNetCore.Components;
 
 namespace Dental.UI.Pages
@@ -17,13 +19,14 @@ namespace Dental.UI.Pages
         protected PaySetupDialogx paySetupDialogx { get; set; }
         [Inject] public IBillDataService BillDataService { get; set; }
         [Inject] public IProcedureDataService ProcedureDataService { get; set; }
+        [Inject]
+        public IMapper mapper { get; set; }
         public Dictionary<string, string> Procedures { get; set; }=new Dictionary<string, string>();
-
+        public BillUI billUI { get; set; }
         protected override async Task OnInitializedAsync()
         {
-            bills = (await BillDataService.GetBills())
-                .Where(b => b.UserName == UserName && b.Closed == false)
-                .ToList();
+            billUI = new BillUI(BillDataService, mapper, UserName);
+            bills = await billUI.GetList();
             PaymentsDue = bills.Sum(b => b.Balance);
             // create dictionary to map procedure codes
             var procedures = (await ProcedureDataService.GetProcedures()).ToList();
@@ -40,10 +43,8 @@ namespace Dental.UI.Pages
 
         public async void PaySetupDialogx_OnDialogClose()
         {
-            bills = (await BillDataService.GetBills())
-                .Where(b => b.UserName == UserName && b.Closed == false)
-                .ToList();
-            PaymentsDue = bills.Sum(b => b.Balance);
+            billUI = new BillUI(BillDataService, mapper, UserName);
+            bills = await billUI.GetList();
             StateHasChanged();
         }
 

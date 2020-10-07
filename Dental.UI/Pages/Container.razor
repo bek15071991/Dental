@@ -1,0 +1,42 @@
+﻿@page "/container"
+@inherits ContainerBase
+
+<section>
+    <div class="jumbotron jumbotron-fluid left-color">
+        <div class="container">
+            <h1 class="display-4">Welcome to The Patient Portal</h1>
+
+        </div>
+    </div>
+    @if (LoginRequired)
+    {
+        <LoginForm 
+                onRegister="RegisterHandler"
+                onDashboard="DashboardHandler"
+                onUserName="UserNameHandler"
+                   />
+    }
+    @if (RegisterPage)
+    {
+        <RegisterForm UserName="@UserName"
+                       onLogin="LoginHandler"
+                      />
+    }
+    @if (LoginRequired == false && RegisterPage == false)
+    {
+        <div class="dashboard">
+            <div class="activity-center">
+                <AppointmentCenter UserName="@UserName" />
+            </div>
+            <div class="activity-center">
+                <PaymentCenter UserName="@UserName" />
+            </div>
+            <div class="activity-center">
+                <MessageCenter UserName="@UserName" />
+            </div>
+
+
+            <button id="logout-button" class="btn btn-primary" @onclick="DashboardLogout">Logout</button>
+        </div>
+    }
+</section>

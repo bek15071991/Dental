@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Dental.Data.Models;
 using Dental.UI.Services;
+using Dental.UI.UIHandlers;
 using Dental.UI.ViewModels;
 using Microsoft.AspNetCore.Components;
 
@@ -23,19 +25,11 @@ namespace Dental.UI.Pages
         public IChargeDataService ChargeDataService { get; set; }
         [Inject]
         public IBillDataService BillDataService { get; set; }
-        public List<PaySetup> PaySetups { get; set; } = null;
-        public PaySetup PaySetup { get; set; } = new PaySetup();
-
-        //public class PaySetupx
-        //{
-        //    public string CreditCardNumber { get; set; }
-        //    public string ExpDate { get; set; }
-        //    public decimal PaymentAmount { get; set; }
-        //    public string CCV { get; set; }
-        //}
+        [Inject]
+        public IMapper mapper { get; set; }
 
         public PaySetupx paySetupx { get; set; } = new PaySetupx();
-
+        public PaymentUI paymentUI { get; set; }
         [Parameter]
         public EventCallback<bool> CloseEventCallback { get; set; }
         public void Show()
@@ -46,33 +40,14 @@ namespace Dental.UI.Pages
 
         protected override void OnInitialized()
         {
+            paymentUI = new PaymentUI(PaySetupDataService, ChargeDataService, BillDataService,
+                mapper, UserName);
             ResetDialog();
         }
         private async void ResetDialog()
         {
-            PaySetups = (await PaySetupDataService.GetPaySetups())
-                .Where(p => p.Username == UserName)
-                .ToList();
-            PaySetup = PaySetups.FirstOrDefault();
-            if (PaySetup == null)
-            {
-                PaySetup = new PaySetup
-                {
-                    Id=0,
-                    Username = UserName,
-                    CreditCardNumber = "",
-                    ExpDate = ""
-                };
-            }
-
-            paySetupx = new PaySetupx
-                {
-                    CreditCardNumber = PaySetup.CreditCardNumber,
-                    ExpDate = PaySetup.ExpDate,
-                    CCV="",
-                    PaymentAmount = PayAmount,
-                };
-            }
+            paySetupx = await paymentUI.GetPaymentModel();
+        }
 
         public void Close()
         {
@@ -81,48 +56,9 @@ namespace Dental.UI.Pages
 
         protected async Task HandleValidSubmit()
 
-        { 
-            // update credit card infoon file
-
-            PaySetup.CreditCardNumber = paySetupx.CreditCardNumber;
-            PaySetup.ExpDate = paySetupx.ExpDate;
-            
-            
-            await PaySetupDataService.UpdatePaySetup(PaySetup);
-            // create charge record
-            var Charge = new Charge
-            {
-                UserName = UserName,
-                Date = DateTime.Now,
-                CreditCardNumber = paySetupx.CreditCardNumber,
-                ExpDate = paySetupx.ExpDate,
-                PaymentAmount = paySetupx.PaymentAmount
-            };
-            await ChargeDataService.AddCharge(Charge);
-            // update open balance on bills
-            List<Bill> bills = (await BillDataService.GetBills())
-                .Where(b => b.UserName == UserName && b.Balance > 0)
-                .ToList();
-            decimal amount = paySetupx.PaymentAmount;
-            foreach (var bill in bills)
-            {
-                decimal balance = bill.Balance;
-                Bill Bill = new Bill();
-                Bill = bill;
-                if (amount >= balance)
-                {
-                    amount -= balance;
-                    Bill.Balance = 0;
-                    Bill.Closed = true;
-                }
-                else
-                {
-                    Bill.Balance -= amount;
-                    amount = 0;
-                }
-
-                await BillDataService.UpdateBill(Bill);
-            }
+        {
+            await paymentUI.ApplyPayment(paySetupx);
+          
             ShowDialog = false;
 
             await CloseEventCallback.InvokeAsync(true);

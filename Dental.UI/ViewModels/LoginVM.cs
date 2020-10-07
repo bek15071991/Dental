@@ -14,14 +14,14 @@ namespace Dental.UI.ViewModels
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (UserName.Length < 10)
+            if (UserName.Length < 4)
             {
                 yield return new ValidationResult(
                     "User name must be at least 10 characters",
                     new[] {nameof(UserName)});
             }
 
-            if (Password.Length < 10)
+            if (Password.Length < 4)
             {
                 yield return new ValidationResult(
                     "Password must be at least 10 characters",

@@ -1,0 +1,67 @@
+﻿@page "/registerform"
+@inherits RegisterFormBase
+
+<section>
+    <h1>Register Page</h1>
+    <EditForm Model="@registerVM" OnValidSubmit="HandleSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="form-group row">
+            <label for="UserName" class="col-sm-2">User Name: </label>
+            <InputText id="UserName" class="form-control col-sm-3" @bind-Value="@registerVM.UserName" placeholder="Enter UserName: "></InputText>
+            <ValidationMessage For="@(() => registerVM.UserName)" />
+        </div>
+        <div class="form-group row">
+            <label for="Password" class="col-sm-2">Password: </label>
+            <InputText id="Password" class="form-control col-sm-3" @bind-Value="@registerVM.Password" placeholder="Enter Password: "></InputText>
+            <ValidationMessage For="@(() => registerVM.Password)" />
+        </div>
+        <div class="form-group row">
+            <label for="FirstName" class="col-sm-2">First Name: </label>
+            <InputText id="FirstName" class="form-control col-sm-3" @bind-Value="@registerVM.FirstName" placeholder="Enter First Name: "></InputText>
+            <ValidationMessage For="@(() => registerVM.FirstName)" />
+        </div>
+        <div class="form-group row">
+            <label for="LastName" class="col-sm-2">Last Name: </label>
+            <InputText id="LastName" class="form-control col-sm-3" @bind-Value="@registerVM.LastName" placeholder="Enter Last Name: "></InputText>
+            <ValidationMessage For="@(() => registerVM.LastName)" />
+        </div>
+        <div class="form-group row">
+            <label for="Street" class="col-sm-2">Street: </label>
+            <InputText id="Street" class="form-control col-sm-3" @bind-Value="@registerVM.Street" placeholder="Enter Street: "></InputText>
+            <ValidationMessage For="@(() => registerVM.Street)" />
+        </div>
+        <div class="form-group row">
+            <label for="City" class="col-sm-2">City </label>
+            <InputText id="City" class="form-control col-sm-3" @bind-Value="@registerVM.City" placeholder="Enter City: "></InputText>
+            <ValidationMessage For="@(() => registerVM.City)" />
+        </div>
+        <div class="form-group row">
+            <label for="State" class="col-sm-2">State: </label>
+            <InputText id="State" class="form-control col-sm-3" @bind-Value="@registerVM.State" placeholder="Enter State: "></InputText>
+            <ValidationMessage For="@(() => registerVM.State)" />
+        </div>
+        <div class="form-group row">
+            <label for="Zipcode" class="col-sm-2">Zipcode: </label>
+            <InputText id="Zipcode" class="form-control col-sm-3" @bind-Value="@registerVM.Zipcode" placeholder="Enter Zipcode: "></InputText>
+            <ValidationMessage For="@(() => registerVM.Zipcode)" />
+        </div>
+        <div class="form-group row">
+            <label for="Email" class="col-sm-2">Email: </label>
+            <InputText id="Email" class="form-control col-sm-3" @bind-Value="@registerVM.Email" placeholder="Enter Email: "></InputText>
+            <ValidationMessage For="@(() => registerVM.Email)" />
+        </div>
+        <div class="form-group row">
+            <label for="HomePhone" class="col-sm-2">Home Phone: </label>
+            <InputText id="HomePhone" class="form-control col-sm-3" @bind-Value="@registerVM.HomePhone" placeholder="Enter Home Phone: "></InputText>
+            <ValidationMessage For="@(() => registerVM.HomePhone)" />
+        </div>
+        <div class="form-group row">
+            <label for="MobilePhone" class="col-sm-2">Mobile Phone: </label>
+            <InputText id="MobilePhone" class="form-control col-sm-3" @bind-Value="@registerVM.MobilePhone" placeholder="Enter Mobile Phone: "></InputText>
+            <ValidationMessage For="@(() => registerVM.MobilePhone)" />
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn btn-secondary" @onclick="HandleCancel">Cancel</button>
+    </EditForm>
+</section>

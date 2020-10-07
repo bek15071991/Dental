@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Dental.UI.Data;
 using Dental.UI.Services;
+using AutoMapper;
+using Dental.UI.ViewModels;
 
 namespace Dental.UI
 {
@@ -52,6 +54,7 @@ namespace Dental.UI
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddAutoMapper(c => c.AddProfile<Automapping>(), typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

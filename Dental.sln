@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dental.API", "Dental.API\De
 		{B6158CFA-62DA-4B95-8D46-7D5B6565384F} = {B6158CFA-62DA-4B95-8D46-7D5B6565384F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalDataTests", "DentalDataTests\DentalDataTests.csproj", "{99BA7FAB-788B-48DE-A2B3-56DE14BA217C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalDataTests", "DentalDataTests\DentalDataTests.csproj", "{99BA7FAB-788B-48DE-A2B3-56DE14BA217C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B6158CFA-62DA-4B95-8D46-7D5B6565384F} = {B6158CFA-62DA-4B95-8D46-7D5B6565384F}
 	EndProjectSection

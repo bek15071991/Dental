@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
+using AutoMapper;
 using Dental.Data.Models;
 using Dental.UI.Services;
+using Dental.UI.UIHandlers;
 using Dental.UI.ViewModels;
 using Microsoft.AspNetCore.Components;
 
@@ -18,16 +20,18 @@ namespace Dental.UI.Pages
 
         [Parameter] 
         public int MessageID { get; set; }
-
-        public Message Message { get; set; }
         public List<Doctor> Doctors { get; set; } = new List<Doctor>();
         public MessageVM MessageVM { get; set; }
         [Inject]
         public IMessageDataService MessageDataService { get; set; }
         [Inject]
         public IDoctorDataService DoctorDataService { get; set; }
+        [Inject]
+        public IMapper mapper { get; set; }
         [Parameter]
         public EventCallback<bool> CloseEventCallback { get; set; }
+        public DoctorUI doctorUI { get; set; }
+        public MessageUI messageUI { get; set; }
         public void Show()
         { 
             ResetDialog();
@@ -37,32 +41,21 @@ namespace Dental.UI.Pages
         {
             if (MessageID == 0)
             {
-                Message = new Message
-                {
-                    MessageText = "",
-                    Direction = "In",
-                    CreateDate = DateTime.Now,
-                    Read = false,
-                    ReadDate = new DateTime(),
-                    UserName = UserName
-                };
+                MessageVM = messageUI.New();
             }
             else
             {
-                Message = await MessageDataService.GetMessage(MessageID);
+                MessageVM = await messageUI.Get(MessageID);
             }
 
-            MessageVM = new MessageVM
-            {
-                MessageText = Message.MessageText,
-                Direction = Message.Direction
-            };
             StateHasChanged();
         }
 
         protected override async Task OnInitializedAsync()
         {
-            Doctors = (await DoctorDataService.GetDoctors()).ToList();
+            doctorUI = new DoctorUI(DoctorDataService);
+            Doctors = await doctorUI.GetList();
+            messageUI = new MessageUI(MessageDataService, mapper, UserName);
             ResetDialog();
         }
 
@@ -75,10 +68,7 @@ namespace Dental.UI.Pages
         {
             if (MessageID == 0)
             {
-                Message.UserName = UserName;
-                Message.MessageText = MessageVM.MessageText;
-                Message.Direction = MessageVM.Direction;
-                await MessageDataService.AddMessage(Message);
+                await messageUI.Add(MessageVM, MessageID);
             }
 
             ShowDialog = false;

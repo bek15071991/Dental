@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Dental.Data.Models;
 using Dental.UI.Services;
+using Dental.UI.UIHandlers;
 using Microsoft.AspNetCore.Components;
 
 namespace Dental.UI.Pages
@@ -20,10 +22,13 @@ namespace Dental.UI.Pages
 
         [Inject]
         public IMessageDataService MessageDataService { get; set; }
-
+        [Inject]
+        public IMapper mapper { get; set; }
+        public MessageUI messageUI { get; set; }
         protected override async Task OnInitializedAsync()
         {
-            messages = (await MessageDataService.GetMessages()).Where(m => m.UserName == UserName).ToList();
+            messageUI = new MessageUI(MessageDataService, mapper, UserName);
+            messages = await messageUI.GetList();
             MessageCount = messages.Count();
         }
 
@@ -39,7 +44,8 @@ namespace Dental.UI.Pages
         }
         public async void AddMessageDialog_OnDialogClose()
         {
-            messages = (await MessageDataService.GetMessages()).Where(m => m.UserName == UserName).ToList();
+            messages = await messageUI.GetList();
+            MessageCount = messages.Count();
             StateHasChanged();
         }
 

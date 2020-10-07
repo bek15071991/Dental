@@ -1,0 +1,26 @@
+﻿@page "/loginform"
+@inherits LoginFormBase
+
+<section>
+
+<div>
+    <h1>Login Please</h1>
+    <p>@Message</p>
+    <EditForm Model="@loginVM" OnValidSubmit="HandleSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="form-group row">
+            <label for="UserName" class="col-sm-2">User Name: </label>
+            <InputText id="UserName" class="form-control col-sm-3" @bind-Value="@loginVM.UserName" placeholder="Enter UserName: "></InputText>
+            <ValidationMessage For="@(() => loginVM.UserName)"/>
+        </div>
+        <div class=" form-group row">
+            <label for="Password" class="col-sm-2">Password: </label>
+            <InputText id="Password" class="form-control col-sm-3" @bind-Value="@loginVM.Password" placeholder="Enter Password: "></InputText>
+            <ValidationMessage For="@(() => loginVM.Password)" />
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <button class="btn btn-secondary" @onclick="RegisterPageHandler">Register</button>
+    </EditForm>
+</div>
+</section>
