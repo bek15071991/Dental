@@ -12,7 +12,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <EditForm Model="@Schedules">
+                    <EditForm Model="@queryParamsVM">
                         <DataAnnotationsValidator />
                         <ValidationSummary />
                         
@@ -27,36 +27,36 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="Years">Years: </label>
-                            <InputSelect id="Years" class="form-control" @bind-Value="@YearSelected">
-                                @foreach (var year in Years)
+                            <label for="Years">Choose Year </label>
+                            <InputSelect id="Years" class="form-control" @bind-Value="@queryParamsVM.YearSelected">
+                                @foreach (var year in queryParamsVM.Years)
                                     {
                                     <option>@year</option>
                                     }
                             </InputSelect>
                         </div>
                         <div class="form-group">
-                            <label for="Months">Months: </label>
-                            <InputSelect id="Months" class="form-control" @bind-Value="@MonthSelected">
-                                @foreach (var month in Months.Keys)
+                            <label for="Months">Choose Month </label>
+                            <InputSelect id="Months" class="form-control" @bind-Value="@queryParamsVM.MonthSelected">
+                                @foreach (var month in queryParamsVM.Months.Keys)
                                     {
                                     <option>@month</option>
                                     }
                             </InputSelect>
                         </div>
                         <div class="form-group">
-                            <label for="DOW">Day of Week: </label>
-                            <InputSelect id="DOW" class="form-control" @bind-Value="@DaySelected">
-                                @foreach (var day in DayOfWeek.Keys)
+                            <label for="DOW">Choose Day of the Week </label>
+                            <InputSelect id="DOW" class="form-control" @bind-Value="@queryParamsVM.DaySelected">
+                                @foreach (var day in queryParamsVM.DayOfWeek.Keys)
                                     {
                                     <option>@day</option>
                                     }
                             </InputSelect>
                         </div>
                         <div class="form-group">
-                            <label for="TOD">Time of Day: </label>
-                            <InputSelect id="TOD" class="form-control" @bind-Value="@TODSelected">
-                                @foreach (var time in TimeOfDay)
+                            <label for="TOD">Choose Time of the Day </label>
+                            <InputSelect id="TOD" class="form-control" @bind-Value="@queryParamsVM.TODSelected">
+                                @foreach (var time in queryParamsVM.TimeOfDay)
                                     {
                                     <option>@time</option>
                                     }
@@ -65,8 +65,8 @@
                         @if (Schedules != null)
                         {
                             <div class="form-group">
-                                <label for="Appt">Appointment: </label>
-                                <InputSelect id="TOD" class="form-control" @bind-Value="@ApptSelected">
+                                <label for="Appt">Select an Appointment: </label>
+                                <InputSelect id="TOD" class="form-control" @bind-Value="@queryParamsVM.ApptSelected">
                                     <option value="0">Select a Time</option>
                                     @foreach (var date in Schedules)
                                             {
@@ -75,12 +75,12 @@
                                 </InputSelect>
                             </div>
                         }
-                        @if (YearSelected != "" && MonthSelected != "" && DaySelected != "" && TODSelected != "")
+                        @if (queryParamsVM.YearSelected != "" && queryParamsVM.MonthSelected != "" && queryParamsVM.DaySelected != "" && queryParamsVM.TODSelected != "")
                         {
                             <button class="btn btn-secondary" @onclick="ProcessSelectHandler">Process</button>
                         }
 
-                        @if (ApptSelected != "")
+                        @if (queryParamsVM.ApptSelected != "")
                         {
                             <button @onclick="HandleValidSubmit" class="btn btn-primary">Save</button>
                         }

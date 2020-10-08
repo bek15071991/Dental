@@ -7,18 +7,8 @@ html, body {
     /* background-image: url('../images/pattern.png'); */
     /* background-repeat: repeat; */
 }
-.row {
-    position: relative;
-}
-.navbar {
 
-    float: left;
-    width: 30%;
-}
-.content {
-    float: left;
-    width: 70%
-}
+
 .left-color {
     background-color: lightblue;
 }
@@ -26,7 +16,7 @@ html, body {
     background-color: lightgray;
 }
 .modal-color {
-    background-color: lightgreen;
+    background-color: lightblue;
 }
 #logout-button {
     margin-top: 1px;
@@ -36,7 +26,17 @@ html, body {
     right: 80px;
 }
 .dashboard {
+    display: flex;
+    flex-direction: column;
     text-align: left;
+}
+.row {
+    display: flex;
+}
+.content {
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 .btn-hide {
     display: none;
@@ -51,11 +51,10 @@ html, body {
     margin-top: 5px;
 }
 .message-table {
-    background-color: lightpink;
+    background-color: lightblue;
     margin: 10px;
     padding: 5px;
-    border: 1px solid blue;
-    width: 100%;
+    border: 1px solid black;
     text-align: left;
 }
 a, .btn-link {
@@ -151,9 +150,6 @@ app {
                 color: white;
             }
 
-.content {
-    padding-top: 0.8rem;
-}
 
 .navbar-toggler {
     background-color: rgba(255, 255, 255, 0.1);

@@ -33,12 +33,12 @@
                 Discover
             </label>
             <div class="form-group">
-                <label for="CreditCard">Credit Card: </label>
+                <label for="CreditCard">Credit Card Number: </label>
                 <InputText id="CreditCard" class="form-control" @bind-Value="@paySetupx.CreditCardNumber" placeholder="Enter Credit Card:"></InputText>
                 <ValidationMessage For="@(() =>paySetupx.CreditCardNumber)" />
             </div>
             <div class="form-group">
-                <label for="ExpDate">Exp Date: </label>
+                <label for="ExpDate">Expiration Date: </label>
                 <InputText id="ExpDate" class="form-control" @bind-Value="@paySetupx.ExpDate" placeholder="Enter Expiration Date:"></InputText>
                 <ValidationMessage For="@(() =>paySetupx.ExpDate)" />
             </div>
