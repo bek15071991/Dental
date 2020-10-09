@@ -32,6 +32,7 @@ namespace Dental.UI.Pages
         public string ApptSelected { get; set; }=new string("");
         public ScheduleUI scheduleUI { get; set; }
         public DoctorUI doctorUI { get; set; }
+        public string Message { get; set; } = new string("");
         protected override async Task OnInitializedAsync()
         {
             scheduleUI = new ScheduleUI(ScheduleDataService, AppointmentDataService);
@@ -61,6 +62,14 @@ namespace Dental.UI.Pages
         public async void ProcessSelectHandler()
         {
             Schedules=await scheduleUI.ProcessQuery(queryParamsVM);
+            if (Schedules==null)
+            {
+                Message = "Try another set of parameters";
+            }
+            else
+            {
+                Message = $"{Schedules.Count} appointments are available";
+            }
             ShowDialog = true;
             StateHasChanged();
         }

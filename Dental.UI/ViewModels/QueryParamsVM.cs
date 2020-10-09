@@ -9,6 +9,8 @@ namespace Dental.UI.ViewModels
     public class QueryParamsVM
     {
         [Required]
+        public string DoctorName { get; set; }
+        [Required]
         public string YearSelected { get; set; }
         [Required]
         public string MonthSelected { get; set; }

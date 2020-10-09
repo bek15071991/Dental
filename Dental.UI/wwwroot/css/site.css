@@ -27,8 +27,16 @@ html, body {
 }
 .dashboard {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-align: left;
+}
+.admin {
+    display: flex;
+    flex-direction: column;
+}
+.client {
+    display: flex;
+    flex-direction: column;
 }
 .row {
     display: flex;

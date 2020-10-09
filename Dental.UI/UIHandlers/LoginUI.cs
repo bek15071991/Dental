@@ -36,8 +36,8 @@ namespace Dental.UI.UIHandlers
         {
             var loginVM = new LoginVM
             {
-                UserName = "jdoe",
-                Password = "test"
+                UserName = "",
+                Password = ""
             };
             return loginVM;
         }

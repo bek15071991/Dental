@@ -96,19 +96,17 @@ namespace Dental.UI.UIHandlers
             DateTime date;
             if (schedule == null)
             {
-                date = DateTime.Now;
+                throw new System.InvalidOperationException("Cannot obtain a Schedule entry");
             }
-            else
-            {
-                date = schedule.Date;
-            }
+            date = schedule.Date;
             // add apointment to customers database
             Appointment appointment = new Appointment
             {
                 UserName = userName,
                 Date = date,
                 Duration = 30,
-                Cancelled = false
+                Cancelled = false,
+                DoctorName=queryParamsVM.DoctorName
             };
             await _appointmentDataService.AddAppointment(appointment);
             var appt = (await _appointmentDataService.GetAppointments())
@@ -116,20 +114,14 @@ namespace Dental.UI.UIHandlers
                 .FirstOrDefault();
             if (appt == null)
             {
-                apptId = 0;
+                throw new System.InvalidOperationException("Cannot create an appointment record");
             }
-            else
-            {
-                apptId = appt.Id;
-            }
+            apptId = appt.Id;
 
-            if (schedule != null)
-            {
-                schedule.Open = false;
-                schedule.ApptId = apptId;
+            schedule.Open = false;
+            schedule.ApptId = apptId;
 
-                await _scheduleDataService.UpdateSchedule(schedule);
-            }
+            await _scheduleDataService.UpdateSchedule(schedule);
 
         }
         public QueryParamsVM New()
@@ -145,6 +137,7 @@ namespace Dental.UI.UIHandlers
             queryParamsVM.MonthSelected = "";
             queryParamsVM.TODSelected = "";
             queryParamsVM.YearSelected = "";
+            queryParamsVM.DoctorName = "";
 
             return queryParamsVM;
         }

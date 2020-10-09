@@ -4,6 +4,8 @@
 <section>
     <div class="row">
         <div class="navbar">
+            @if (DisplayAppointments == false || appointments == null)
+            {
             <div class="card left-color" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Appointment Center</h5>
@@ -15,6 +17,7 @@
                                  CloseEventCallback="@ApptDialog_OnDialogClose"></ApptDialog>
                 </div>
             </div>
+            }
         </div>
         <div class="content">
             @if (DisplayAppointments && appointments != null)
@@ -23,6 +26,7 @@
                     <thead>
                     <tr>
                         <td>ID</td>
+                        <td>Doctor</td>
                         <td>Date</td>
                         <td>Time</td>
                         <td><button class="btn btn-secondary" @onclick="() => DisplayAppointments=false">Close</button></td>
@@ -33,6 +37,7 @@
                     {
                         <tr>
                             <td>@appointment.Id</td>
+                            <td>@appointment.DoctorName</td>
                             <td>@appointment.Date.ToLongDateString()</td>
                             <td>@appointment.Date.ToLongTimeString()</td>
                             <td><button class="btn btn-danger" @onclick="() => cancelApptHandler(appointment.Id)">Cancel</button></td>

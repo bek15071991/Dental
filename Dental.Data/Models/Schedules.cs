@@ -11,5 +11,6 @@ namespace Dental.Data.Models
         public DateTime Date { get; set; }
         public int ApptId { get; set; }
         public bool Open { get; set; }
+        public string DoctorName { get; set; }
     }
 }

@@ -18,7 +18,6 @@ namespace Dental.UI.Pages
         [Parameter]
         public string UserName { get; set; }
 
-        [Parameter] 
         public int MessageID { get; set; }
         public List<Doctor> Doctors { get; set; } = new List<Doctor>();
         public MessageVM MessageVM { get; set; }
@@ -32,8 +31,9 @@ namespace Dental.UI.Pages
         public EventCallback<bool> CloseEventCallback { get; set; }
         public DoctorUI doctorUI { get; set; }
         public MessageUI messageUI { get; set; }
-        public void Show()
-        { 
+        public void Show(int id)
+        {
+            MessageID = id;
             ResetDialog();
             ShowDialog = true;
         }

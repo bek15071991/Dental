@@ -11,8 +11,10 @@ namespace Dental.UI.ViewModels
     {
         [Required]
         public string UserName { get; set; }
+        [Required]
         [PasswordPropertyText]
         public string Password { get; set; }
+        [Required]
         [PasswordPropertyText]
         public string Password2 { get; set; }
         [Required]
@@ -40,10 +42,10 @@ namespace Dental.UI.ViewModels
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
     
-            if (Password.Length < 10)
+            if (Password.Length < 8)
             {
                 yield return new ValidationResult(
-                    "Password must be at least 10 characters",
+                    "Password must be at least 8 characters",
                     new[] { nameof(Password) });
             }
 

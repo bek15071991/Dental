@@ -12,6 +12,7 @@ namespace Dental.Data.Models
         public DateTime Date { get; set; }
         public int Duration { get; set; }
         public bool Cancelled { get; set; }
+        public string DoctorName { get; set; }
 
     }
 }

@@ -18,7 +18,7 @@
                         
                         <div class="form-group">
                             <label for="Doctor">Doctor: </label>
-                            <InputSelect id="Doctor" class="form-control" @bind-Value="@DoctorName">
+                            <InputSelect id="Doctor" class="form-control" @bind-Value="@queryParamsVM.DoctorName">
                                 @foreach (var doctor in Doctors)
                                 {
                                     <option>@doctor.Name @doctor.Speciality</option>
@@ -62,6 +62,7 @@
                                     }
                             </InputSelect>
                         </div>
+                        <p>@Message</p>
                         @if (Schedules != null)
                         {
                             <div class="form-group">

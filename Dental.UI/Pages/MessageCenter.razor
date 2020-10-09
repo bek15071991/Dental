@@ -5,7 +5,8 @@
     <div class="row">
         <div class="navbar">
 
-  
+  @if (DisplayMessages==false || messages==null)
+  {
             <div class="card left-color" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Message Center</h5>
@@ -14,20 +15,25 @@
                     <button @onclick="() => QuickAddMessage(0)" class="btn btn-primary">Add</button>
                     <AddMessageDialog @ref="addMessageDialog"
                                        UserName="@UserName"
-                                       MessageID="@messageID"
                                        CloseEventCallback="@AddMessageDialog_OnDialogClose">
                     </AddMessageDialog>
 
                 </div>
             </div>
+  }
         </div>
         <div class="content">
             @if (DisplayMessages && messages != null)
             {
+                <AddMessageDialog @ref="addMessageDialog"
+                                  UserName="@UserName"
+                                  CloseEventCallback="@AddMessageDialog_OnDialogClose">
+                </AddMessageDialog>
                 <table class="table table-striped message-table">
                     <thead>
                         <tr>
                             <td>ID</td>
+                            <td>Doctor</td>
                             <td>Date</td>
                             <td>Dir</td>
                             <td>Message</td>
@@ -35,16 +41,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach (var message in messages)
-                    {
-                        <tr>
-                            <td>@message.Id</td>
-                            <td>@message.CreateDate.ToLongDateString()</td>
-                            <td>@message.Direction</td>
-                            <td>@message.MessageText</td>
-                            <td><button class="btn-secondary btn" @onclick="() => QuickAddMessage(message.Id)">Open</button></td>
-                        </tr>
-                    }
+                        @foreach (var message in messages)
+                        {
+                            <tr>
+                                <td>@message.Id</td>
+                                <td>@message.DoctorName</td>
+                                <td>@message.CreateDate.ToLongDateString()</td>
+                                <td>@message.Direction</td>
+                                <td>@message.MessageText</td>
+                                <td><button class="btn-secondary btn" @onclick="() => QuickAddMessage(message.Id)">Open</button></td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
 

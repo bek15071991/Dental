@@ -14,5 +14,6 @@ namespace Dental.Data.Models
         public DateTime ReadDate { get; set; }
         public DateTime CreateDate { get; set; }
         public string UserName { get; set; }
+        public string DoctorName { get; set; }
     }
 }

@@ -53,7 +53,7 @@ namespace Dental.UI.Pages
         {
             messageID = id;
             InvokeAsync(StateHasChanged);
-            addMessageDialog.Show();
+            addMessageDialog.Show(messageID);
         }
     }
 }

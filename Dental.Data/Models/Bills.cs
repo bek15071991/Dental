@@ -15,5 +15,6 @@ namespace Dental.Data.Models
         public decimal Insurance { get; set; }
         public decimal Balance { get; set; }
         public bool Closed { get; set; }
+        public string DoctorName { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace Dental.UI.Pages
         {
             cred = new Credential
             {
-                UserName = "jdoe",
+                UserName = "",
                 Password = ""
             };
             // sample data
