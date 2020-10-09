@@ -16,6 +16,7 @@ namespace Dental.UI.ViewModels
             CreateMap<PaySetup, PaySetupx>();
             CreateMap<PaySetupx, PaySetup>();
             CreateMap<RegisterVM, Client>();
+            CreateMap<Client, RegisterVM>();
             CreateMap<RegisterVM, Credential>();
         }
     }

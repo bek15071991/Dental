@@ -1,0 +1,74 @@
+﻿@inherits ProfileDialogBase
+
+@if (ShowDialog)
+{
+    <div class="modal fade show d-block" id="exampleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-color">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleLabel">Profile Edit</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <EditForm Model="@registerVM" OnValidSubmit="@HandleValidSubmit">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+
+                        
+                        <div class="form-group row">
+                            <label for="FirstName" class="col-sm-4">First Name: </label>
+                            <InputText id="FirstName" class="form-control col-sm-6" @bind-Value="@registerVM.FirstName" placeholder="Enter First Name: "></InputText>
+                            <ValidationMessage For="@(() => registerVM.FirstName)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="LastName" class="col-sm-4">Last Name: </label>
+                            <InputText id="LastName" class="form-control col-sm-6" @bind-Value="@registerVM.LastName" placeholder="Enter Last Name: "></InputText>
+                            <ValidationMessage For="@(() => registerVM.LastName)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="Street" class="col-sm-4">Street: </label>
+                            <InputText id="Street" class="form-control col-sm-6" @bind-Value="@registerVM.Street" placeholder="Enter Street: "></InputText>
+                            <ValidationMessage For="@(() => registerVM.Street)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="City" class="col-sm-4">City </label>
+                            <InputText id="City" class="form-control col-sm-6" @bind-Value="@registerVM.City" placeholder="Enter City: "></InputText>
+                            <ValidationMessage For="@(() => registerVM.City)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="State" class="col-sm-4">State: </label>
+                            <InputText id="State" class="form-control col-sm-6" @bind-Value="@registerVM.State" placeholder="Enter State: "></InputText>
+                            <ValidationMessage For="@(() => registerVM.State)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="Zipcode" class="col-sm-4">Zipcode: </label>
+                            <InputText id="Zipcode" class="form-control col-sm-6" @bind-Value="@registerVM.Zipcode" placeholder="Enter Zipcode: "></InputText>
+                            <ValidationMessage For="@(() => registerVM.Zipcode)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="Email" class="col-sm-4">Email: </label>
+                            <InputText id="Email" class="form-control col-sm-6" @bind-Value="@registerVM.Email" placeholder="Enter Email: "></InputText>
+                            <ValidationMessage For="@(() => registerVM.Email)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="HomePhone" class="col-sm-4">Home Phone: </label>
+                            <InputText id="HomePhone" class="form-control col-sm-6" @bind-Value="@registerVM.HomePhone" placeholder="Enter Home Phone: "></InputText>
+                            <ValidationMessage For="@(() => registerVM.HomePhone)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="MobilePhone" class="col-sm-4">Mobile Phone: </label>
+                            <InputText id="MobilePhone" class="form-control col-sm-6" @bind-Value="@registerVM.MobilePhone" placeholder="Enter Mobile Phone: "></InputText>
+                            <ValidationMessage For="@(() => registerVM.MobilePhone)" />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a class="btn btn-outline-primary" @onclick="@Close">Close</a>
+                    </EditForm>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

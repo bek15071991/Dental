@@ -6,12 +6,12 @@
         <div class="navbar">
             @if (DisplayAppointments == false || appointments == null)
             {
-            <div class="card left-color" style="width: 18rem;">
+            <div class="card shadow left-color" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Appointment Center</h5>
                     <p class="card-text">You have @ApptCount appointments pending.</p><br/>
                     <button class="btn btn-primary" @onclick="DisplayReportHandler">List</button>
-                    <button class="btn btn-secondary" @onclick="QuickAddAppt">Add</button>
+                    <button class="btn btn-primary" @onclick="QuickAddAppt">Add</button>
                     <ApptDialog @ref="apptDialog"
                                  UserName="@UserName"
                                  CloseEventCallback="@ApptDialog_OnDialogClose"></ApptDialog>

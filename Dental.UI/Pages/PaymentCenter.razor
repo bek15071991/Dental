@@ -6,12 +6,12 @@
         <div class="navbar">
             @if (DisplayBills == false || bills == null)
             {
-            <div class="card left-color" style="width: 18rem;">
+            <div class="card shadow left-color" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Payment Center</h5>
                     <p class="card-text">You have a payment of @PaymentsDue Due</p><br/>
                     <button class="btn btn-primary" @onclick="DisplayReportHandler">List</button>
-                    <button class="btn btn-secondary" @onclick="QuickAddPayment">Pay</button>
+                    <button class="btn btn-primary" @onclick="QuickAddPayment">Pay</button>
                     <PaySetupDialogx @ref="paySetupDialogx"
                                       UserName="@UserName"
                                       PayAmount="@PaymentsDue"

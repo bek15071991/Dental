@@ -5,12 +5,15 @@
     <div class="row">
         <div class="navbar">
 
-            <div class="card left-color" style="width: 18rem;">
+            <div class="card shadow left-color" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Profile Center</h5>
-                    <p class="card-text">Curtis Flory - cfloryiv</p><br />
-                    <button class="btn btn-secondary">Edit</button>
-                   
+                    <p class="card-text">User Name = @UserName</p><br />
+                    <button @onclick="() => EditProfile()" class="btn btn-primary">Edit</button>
+                    <ProfileDialog @ref="profileDialog"
+                                      UserName="@UserName"
+                                      CloseEventCallback="@ProfileDialog_OnDialogClose">
+                    </ProfileDialog>
                 </div>
             </div>
         </div>

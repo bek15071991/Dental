@@ -11,10 +11,16 @@ namespace Dental.UI.Pages
     {
         [Parameter]
         public string UserName { get; set; }
-
-       public void Start()
+        protected ProfileDialog profileDialog { get; set; }
+        public void ProfileDialog_OnDialogClose()
         {
+           
+            StateHasChanged();
+        }
 
+        protected void EditProfile()
+        {
+            profileDialog.Show();
         }
     }
 }
