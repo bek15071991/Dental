@@ -16,7 +16,7 @@
         </div>
         <div class=" form-group row">
             <label for="Password" class="col-sm-2">Password: </label>
-            <InputText id="Password" class="form-control col-sm-3" @bind-Value="@loginVM.Password" placeholder="Enter Password: "></InputText>
+            <InputText id="Password" type="password" class="form-control col-sm-3" @bind-Value="@loginVM.Password" placeholder="Enter Password: "></InputText>
             <ValidationMessage For="@(() => loginVM.Password)" />
         </div>
         <button type="submit" class="btn btn-primary">Login</button>

@@ -3,15 +3,55 @@
     <section>
         <div class="row">
             <div class="navbar">
-
+                @if (DisplayBills==false)
+                {
                 <div class="card shadow left-color" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Billing Center</h5>
                         <p class="card-text">Curtis Flory - cfloryiv</p><br />
-                        <button class="btn btn-primary">Bill</button>
+                        <button class="btn btn-primary" @onclick="() => PostToAppointments()">Bill</button>
 
                     </div>
                 </div>
+                }
+            </div>
+            <div class="content">
+                @if (DisplayBills)
+                {
+                <EditForm Model="@billVMs" OnValidSubmit="SubmitHandler">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <table class="table table-striped shadow message-table">
+                        <thead>
+                            <tr>
+                                <td>Date</td>
+                                <td>Doctor</td>
+                                <td>Client</td>
+                                <td>Procedure Code</td>
+                                <td><button class="btn btn-secondary" @onclick="() => DisplayBills=false">Close</button></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var billVM in billVMs)
+                            {
+                                <tr>
+                                    <td>@billVM.Date</td>
+                                    <td>@billVM.DoctorName</td>
+                                    <td>@billVM.Name</td>
+                                    <td>
+                                        <div class="form-group">
+                                            <InputText id="ProcedureCode" class="form-control" @bind-Value="@billVM.ProcedureCode"></InputText>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-primary">Post</button>
+
+                </EditForm>
+                }
             </div>
         </div>
     </section>

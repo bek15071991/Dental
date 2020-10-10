@@ -13,12 +13,12 @@
         </div>
         <div class="form-group row">
             <label for="Password" class="col-sm-2">Password: </label>
-            <InputText id="Password" class="form-control col-sm-3" @bind-Value="@registerVM.Password" placeholder="Enter Password: "></InputText>
+            <InputText id="Password" type="password" class="form-control col-sm-3" @bind-Value="@registerVM.Password" placeholder="Enter Password: "></InputText>
             <ValidationMessage For="@(() => registerVM.Password)" />
         </div>
         <div class="form-group row">
             <label for="Password2" class="col-sm-2">Repeat Password: </label>
-            <InputText id="Password2" class="form-control col-sm-3" @bind-Value="@registerVM.Password2" placeholder="Enter Password: "></InputText>
+            <InputText id="Password2" type="password" class="form-control col-sm-3" @bind-Value="@registerVM.Password2" placeholder="Enter Password: "></InputText>
             <ValidationMessage For="@(() => registerVM.Password2)" />
         </div>
         <div class="form-group row">

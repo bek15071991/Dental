@@ -18,6 +18,10 @@ namespace Dental.UI.ViewModels
             CreateMap<RegisterVM, Client>();
             CreateMap<Client, RegisterVM>();
             CreateMap<RegisterVM, Credential>();
+            CreateMap<Bill, BillVM>();
+            CreateMap<BillVM, Bill>();
+            CreateMap<BillVM, Appointment>();
+            CreateMap<Appointment, BillVM>();
         }
     }
 }

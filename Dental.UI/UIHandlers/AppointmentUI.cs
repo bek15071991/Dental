@@ -28,6 +28,13 @@ namespace Dental.UI.UIHandlers
                 .Where(a => a.UserName == _userName && a.Date >= DateTime.Now && a.Cancelled == false)
                 .ToList();
         }
+        public async Task<List<Appointment>> GetPage()
+        {
+            return (await _appointmentDataService.GetAppointments())
+                 .Where(a => a.Date >= DateTime.Now && a.Cancelled == false && a.DoctorName != null)
+                 .Take(10)
+                 .ToList();
+        }
         public async Task Cancel(int apptID)
         {
             var appointments = await GetList();

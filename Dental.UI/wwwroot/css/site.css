@@ -1,13 +1,35 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
-html, body {
+html {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    overflow-x: hidden;
     background-color: lightgrey;
-    /* background-image: url('../images/pattern.png'); */
+    /* background-image: url('../images/kisspng-caduceus-as-a-symbol-of-medicine-staff-of-hermes-l-doctor-symbol-cliparts-5a88666ceca992.2170441615188885569694.png');*/
     /* background-repeat: repeat; */
 }
-
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /* overflow-x: hidden; */
+    background-color: lightgrey;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    z-index: 0;
+}
+    body::after {
+        background: url('../images/kisspng-caduceus-as-a-symbol-of-medicine-staff-of-hermes-l-doctor-symbol-cliparts-5a88666ceca992.2170441615188885569694.png');
+        background-repeat: repeat;
+        background-size: 20% 20%;
+        content: "";
+        opacity: 0.2;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: -1;
+    }
 
 .left-color {
     background-color: lightblue;
